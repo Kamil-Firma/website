@@ -61,7 +61,7 @@ wrongnote = 'piano/wrong.mp3';
 wrongnote_random = 0;
 
 function pianokey(key){
-	wrongnote_random = Math.floor(Math.random() * 50);
+	wrongnote_random = Math.floor(Math.random() * 200);
 	if(wrongnote_random==1){
 		var toplay = wrongnote;
 	}else{
@@ -71,4 +71,3 @@ function pianokey(key){
 	var audio = new Audio( toplay );
 	audio.play();
 }
-
