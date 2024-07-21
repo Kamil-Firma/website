@@ -176,6 +176,9 @@ carousel_id = Math.floor(Math.random() * carousel_images.length);
 highlight_update_image();
 
 function highlight_change_image(){
+	var audio = new Audio( 'assets/click.mp3' );
+	audio.play();
+	
 	carousel_id ++;
 	if(carousel_id >= carousel_images.length){
 		carousel_id = 0;
