@@ -1,39 +1,7 @@
 <html>
 <head>
 	<title>my website!!</title>
-	<style>
-		body {
-			background-image: url('assets/space.gif');
-			color: white;
-			font-family: Comic Sans MS;
-			text-align:center;
-		}
-		img {
-			image-rendering: pixelated;
-		}
-		a:link {
-			color: ff9afc
-		}
-		a:visited {
-			color: ff9afc
-		}
-		table {
-			padding-top: 5;
-			padding-bottom: 10
-			padding-left: 10;
-			padding-right: 10
-		}
-		td {
-			padding-top: 5;
-			padding-bottom: 10
-			padding-left: 10;
-			padding-right: 10
-		}
-		#highlight {
-			background-image: url('assets/space2.gif');
-		}
-	</style>
-	
+	<link rel="stylesheet" href="styles.css">
 	<link rel="icon" href="assets/favicon.png">
 </head>
 
@@ -151,43 +119,4 @@ here's this guy:
 </body>
 </html>
 
-<script>
-
-pressed_logo = 0;
-
-function play_theme(){
-	if(pressed_logo==0){
-		var audio = new Audio( 'assets/theme.mp3' );
-		audio.play();
-		pressed_logo = 1;
-	}
-}
-
-carousel_images = [
-	'ruin2_s1.png',
-	'ruin2_s2.png',
-	'ruin2_s3.png',
-	'ruin2_s4.png',
-	'ruin2_s5.png',
-	'ruin2_s6.png',
-	'ruin2_s7.png'
-];
-carousel_id = Math.floor(Math.random() * carousel_images.length);
-highlight_update_image();
-
-function highlight_change_image(){
-	var audio = new Audio( 'assets/click.mp3' );
-	audio.play();
-	
-	carousel_id ++;
-	if(carousel_id >= carousel_images.length){
-		carousel_id = 0;
-	}
-	highlight_update_image();
-}
-
-function highlight_update_image(){
-	document.getElementById("highlight_carousel").innerHTML = "<img src='highlight/"+carousel_images[carousel_id]+"' width=650 onclick='highlight_change_image()' style='cursor: pointer'>";
-}
-
-</script>
+<script src='script.js'></script>
