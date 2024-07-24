@@ -13,17 +13,12 @@ a:link {
 a:visited {
 	color: ff9afc
 }
-table {
-	padding-top: 5;
-	padding-bottom: 10
-	padding-left: 10;
-	padding-right: 10
-}
 td {
 	padding-top: 5;
 	padding-bottom: 10
 	padding-left: 10;
-	padding-right: 10
+	padding-right: 10;
+	vertical-align: top
 }
 #highlight {
 	background-image: url('assets/space2.gif');
