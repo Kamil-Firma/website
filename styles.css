@@ -4,15 +4,19 @@ body {
 	font-family: Comic Sans MS;
 	text-align:center;
 }
+
 img {
 	image-rendering: pixelated;
 }
+
 a:link {
 	color: ff9afc
 }
+
 a:visited {
 	color: ff9afc
 }
+
 td {
 	padding-top: 5;
 	padding-bottom: 10
@@ -20,6 +24,7 @@ td {
 	padding-right: 10;
 	vertical-align: top
 }
+
 #highlight {
 	background-image: url('assets/space2.gif');
 }
