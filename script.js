@@ -71,3 +71,8 @@ function pianokey(key){
 	var audio = new Audio( toplay );
 	audio.play();
 }
+
+//have fun
+function havefun(){
+	document.location.replace('fun.html');
+}
