@@ -1,3 +1,16 @@
+//links ------------------------------------------------------------
+shouldshowlinks = 1;
+show_links();
+function show_links(){
+	shouldshowlinks = shouldshowlinks*-1+1;
+	
+	if(shouldshowlinks==0){
+		document.getElementById("links").style.visibility = "hidden";
+	}else{
+		document.getElementById("links").style.visibility = "visible";
+	}
+}
+
 //clicking rabbitdud ------------------------------------------------------------
 played_theme = 0;
 
@@ -7,7 +20,6 @@ function play_theme(){
 		audio.play();
 		played_theme = 1;
 		document.getElementById("piano").style.visibility = "visible";
-
 	}
 }
 

@@ -25,6 +25,12 @@ td {
 	vertical-align: top
 }
 
+#links {
+	border: 1px solid white;
+	width: 20%;
+	margin: auto;
+}
+
 #highlight {
 	background-image: url('assets/space2.gif');
 }
