@@ -4,50 +4,37 @@
 	<link rel="stylesheet" href="styles.css">
 	<link rel="icon" href="assets/favicon.png">
 	<style>
-		td {
-			width: 150px;
-			height: 150px;
-			text-align: center;
-		}
-		#players {
-			font-size: 50;
-			background-color: 4c0303;
-			width: 50%;
-			padding: 10;
-			border: 5px solid white;
+		.games {
+			float: left;
+			margin: 50;
+			border: 2px white solid;
+			padding: 20;
+			width: 200;
+			height: 250;
 		}
 	</style>
 </head>
-
 <body>
 
-<center>
-<br>
-<input type='checkbox' id='hardmode' onclick='change_mode()'> HARD MODE
 <br><br>
-<div id='players'></div>
-<br>
-<table border=1>
-	<tr>
-		<td> <div id=0></div> </td>
-		<td> <div id=1></div> </td>
-		<td> <div id=2></div> </td>
-	</tr>
-	<tr>
-		<td> <div id=3></div> </td>
-		<td> <div id=4></div> </td>
-		<td> <div id=5></div> </td>
-	</tr>
-	<tr>
-		<td> <div id=6></div> </td>
-		<td> <div id=7></div> </td>
-		<td> <div id=8></div> </td>
-	</tr>
-</table>
-<div id='wintext'></div>
+<h1>Select a game.</h1>
+<br><br>
+
+<center>
+	<div class='games'><img src='assets/fun/tictactoe.png' onclick='change_tictactoe()'><br>Tic Tac Toe</div>
+	<div class='games'><img src='assets/fun/theguess.png' onclick='change_guess()'><br>The Guess</div>
+</center>
+
+<script>
+	function change_tictactoe(){
+		document.location.replace('tictactoe.html');
+	}
+	function change_guess(){
+		document.location.replace('guess.html');
+	}
+</script>
 
 </body>
 </html>
 
 <script src='script.js'></script>
-<script src='game.js'></script>
