@@ -1,5 +1,6 @@
 board_state = [0,0,0,0,0,0,0,0,0];
 where_o = Math.floor(Math.random() * 9);
+first_player = 0;
 symbol_count = 0;
 win = 0;
 
@@ -28,9 +29,11 @@ function set_player_images() {
 		player_image[1] = Math.floor(Math.random() * images.length);
 	}
 	state_definition = [
-		'<img src="' + image_path + '/' + images[player_image[0]] + '" width="100px">',
-		'<img src="' + image_path + '/' + images[player_image[1]] + '" width="100px">'
+		'<img src="' + image_path + '/' + images[player_image[0]] + '" width="150px">',
+		'<img src="' + image_path + '/' + images[player_image[1]] + '" width="150px">'
 	];
+	
+	document.getElementById('players').innerHTML = state_definition[0] + " VS. " + state_definition[1];
 }
 set_player_images();
 
@@ -62,6 +65,15 @@ function placex(where) {
 		
 		refresh_board();
 	}
+}
+
+function check_if_ai_starts() {
+	first_player = first_player*-1+1;
+	if(first_player==1){
+		place_o();
+	}
+	
+	refresh_board();
 }
 
 function place_o() {
@@ -115,9 +127,11 @@ function restart_game() {
 	where_o = Math.floor(Math.random() * 9);
 	symbol_count = 0;
 	win = 0;
+	
 	document.getElementById('wintext').innerHTML = "";
 	set_player_images();
 	refresh_board();
+	check_if_ai_starts();
 }
 
 refresh_board();
