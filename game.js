@@ -4,6 +4,8 @@ first_player = 0;
 symbol_count = 0;
 win = 0;
 
+hardmode = 0;
+
 image_path = "assets/fun";
 images = ["baikal seal.jpg",
 "bearded seal.jpg",
@@ -80,12 +82,14 @@ function check_if_ai_starts() {
 }
 
 function place_o() {
-	if(win == 0 && symbol_count < 9){
-		while( board_state[where_o] != 0){
-			where_o = Math.floor(Math.random() * 9);
+	for(i=0; i<hardmode+1; i++){
+		if(win == 0 && symbol_count < 9){
+			while( board_state[where_o] != 0){
+				where_o = Math.floor(Math.random() * 9);
+			}
+			board_state[where_o] = 2;
+			symbol_count ++;
 		}
-		board_state[where_o] = 2;
-		symbol_count ++;
 	}
 }
 
@@ -107,7 +111,12 @@ function check_for_win() {
 	}
 	
 	if(win != 0 && win != 3){
-		document.getElementById('wintext').innerHTML = state_definition[win-1] + ' win<br><button onclick="restart_game()">RESTART</button>';
+		var hardmodetag = '';
+		if(hardmode==1){
+			hardmodetag = ' <small>(hard mode)</small>'
+		}
+		
+		document.getElementById('wintext').innerHTML = state_definition[win-1] + ' win' + hardmodetag + '<br><button onclick="restart_game()">RESTART</button>';
 		play_jingle(win);
 	}else if(symbol_count >= 9){
 		document.getElementById('wintext').innerHTML = 'TIE.<br><button onclick="restart_game()">RESTART</button>';
@@ -117,12 +126,21 @@ function check_for_win() {
 }
 
 function play_jingle(who) { //1 - player, 2 - opponent, 3 - tie
-	var audio_jingles = [
+	var audio_jingles_easy = [
 		new Audio( 'assets/fun/win.ogg' ),
 		new Audio( 'assets/fun/lose.ogg' ),
 		new Audio( 'assets/fun/tie.ogg' )
 	];
-	audio_jingles[who-1].play();
+	var audio_jingles_hard = [
+		new Audio( 'assets/fun/win-hardmode.ogg' ),
+		new Audio( 'assets/fun/lose-hardmode.ogg' ),
+		new Audio( 'assets/fun/tie-hardmode.ogg' )
+	];
+	if(hardmode==0){
+		audio_jingles_easy[who-1].play();
+	}else{
+		audio_jingles_hard[who-1].play();
+	}
 }
 
 function restart_game() {
@@ -136,5 +154,19 @@ function restart_game() {
 	refresh_board();
 	check_if_ai_starts();
 }
+
+function change_mode() {
+	var newmode = document.getElementById('hardmode').checked;
+	if(hardmode != newmode){
+		hardmode = newmode;
+		
+		var audio = new Audio( 'assets/click.mp3' );
+		audio.play();
+		
+		first_player = 0;
+		restart_game();
+	}
+}
+change_mode();
 
 refresh_board();
