@@ -56,6 +56,9 @@ function placex(where) {
 		board_state[where] = 1;
 		symbol_count ++;
 		
+		var audio = new Audio( 'assets/click.mp3' );
+		audio.play();
+		
 		check_for_win();
 		
 		if(win == 0 && symbol_count < 9){
