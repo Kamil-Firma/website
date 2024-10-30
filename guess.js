@@ -25,6 +25,11 @@ guy_image = Math.floor(Math.random() * images.length), Math.floor(Math.random() 
 guy = '<img src="' + image_path + '/' + images[guy_image] + '" width="500px">';
 document.getElementById('sealimage').innerHTML = guy;
 
+
+hints = 0;
+lowest = 0;
+highest = 1000000;
+
 //message-------------------------------------
 message = 'I have chosen a number.';
 function refresh(){
@@ -50,6 +55,15 @@ function guess(){
 		win = 1;
 	}
 	
+	//hints
+	if(chosen_number < guess && guess < highest){
+		highest = guess;
+	}else if(chosen_number > guess && guess > lowest){
+		lowest = guess;
+	}
+	refresh_hint();
+	
+	//dialog
 	if(win==0){
 		if(wrong_choices<2){
 			message = 'Wrong!';
@@ -95,4 +109,22 @@ function guess(){
 	}
 	
 	refresh();
+}
+
+//hints
+function hints_on(){
+	var audio = new Audio( 'assets/click.mp3' );
+	audio.play();
+	
+	hints = document.getElementById('hints_button').checked;
+	refresh_hint();
+}
+
+function refresh_hint(){
+	if(hints == 0){
+		document.getElementById('hints').innerHTML = "";
+	}else{
+		var bestidea = Math.round((parseInt(highest)+parseInt(lowest))/2);
+		document.getElementById('hints').innerHTML = "Somewhere between.. "+lowest+" and "+highest+"..<br><small>"+bestidea+" might be a good choice.</small>";
+	}
 }

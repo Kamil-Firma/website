@@ -4,9 +4,6 @@ show_links();
 function show_links(){
 	shouldshowlinks = shouldshowlinks*-1+1;
 	
-	var audio = new Audio( 'assets/click.mp3' );
-	audio.play();
-	
 	if(shouldshowlinks==0){
 		document.getElementById("links").style.visibility = "hidden";
 	}else{
