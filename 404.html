@@ -22,6 +22,17 @@
     </style>
 </head>
 <body>
-    <div id='error'>sorry..<br><br><a href='index.html'>take me back..</a></div>
+    <div id='error' onclick="playmusic()">sorry..</div>
 </body>
+
+<script>
+    playedmusic = 0;
+    function playmusic(){
+        if(playedmusic==0){
+            var audio = new Audio( '/assets/sorry.ogg' );
+            audio.play();
+            playedmusic = 1;
+        }
+    }
+</script>
 </html>
