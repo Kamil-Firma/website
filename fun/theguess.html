@@ -1,0 +1,167 @@
+<html>
+<head>
+	<title>the guess.</title>
+    <link rel="icon" href="../assets/favicon.png">
+	<style>
+        body {
+            background-image: url("../assets/space.gif");
+            color: white;
+            font-family: 'Comic Sans MS';
+        }
+		#speechbubble {
+			font-size: 50;
+		}
+		img {
+			margin: 20;
+		}
+	</style>
+</head>
+<body>
+
+<center>
+<div id='speechbubble'></div>
+<img src='speech_bubble.png' width=300><br>
+<div id='sealimage'></div>
+
+<div id='guess_box'>
+	<input type=number min=0 max=1000000 id='theguess' placeholder='write here'>
+	<input type=submit value='yep, i think thats it' onclick='guess()'>
+</div>
+
+<br><br><br><input type='checkbox' id='hints_button' onclick='hints_on()'>Hmm.. turn on Hints please
+<br><div id='hints'></div>
+
+<script>
+    //the guy--------------------------------
+    chosen_number = Math.floor(Math.random() * 1000000);
+    win = 0;
+    wrong_choices = 0;
+
+    images = ["baikal seal.jpg",
+    "bearded seal.jpg",
+    "caribbean monk seal.jpg",
+    "gray seal.jpg",
+    "guadalupe fur seal.jpg",
+    "harbor seal.png",
+    "hooded seal.jpg",
+    "japanese sea lion.jpg",
+    "new zealand sea lion.jpg",
+    "northern fur seal.jpg",
+    "ribbon seal.jpg",
+    "ringed seal.jpg",
+    "ross seal.jpg",
+    "spotted seal 2.jpg",
+    "spotted seal.jpg",
+    "walrus 2.jpg",
+    "walrus.jpg"];
+    guy_image = Math.floor(Math.random() * images.length), Math.floor(Math.random() * images.length);
+    guy = '<img src="' + images[guy_image] + '" width="500px">';
+    document.getElementById('sealimage').innerHTML = guy;
+
+
+    hints = 0;
+    lowest = 0;
+    highest = 1000000;
+
+    //message-------------------------------------
+    message = 'I have chosen a number.';
+    function refresh(){
+        document.getElementById('speechbubble').innerHTML = message;
+        //document.getElementById('speechbubble').innerHTML = message + " ("+chosen_number+")";
+    }
+
+    refresh();
+
+    //guess--------------------------------------
+    function guess(){
+        wrong_choices ++;
+        
+        var audio = new Audio( '../assets/click.mp3' );
+        audio.play();
+        
+        var guess = document.getElementById('theguess').value;
+        document.getElementById('theguess').value = '';
+        
+        var difference = chosen_number-guess;
+        
+        if(guess == chosen_number){
+            win = 1;
+        }
+        
+        //hints
+        if(chosen_number < guess && guess < highest){
+            highest = guess;
+        }else if(chosen_number > guess && guess > lowest){
+            lowest = guess;
+        }
+        refresh_hint();
+        
+        //dialog
+        if(win==0){
+            if(wrong_choices<2){
+                message = 'Wrong!';
+            }else if(wrong_choices<6){
+                if(difference>0){
+                    message = 'Still wrong! Hmm.. maybe a bit more.';
+                }else{
+                    message = 'Still wrong! Hmm.. maybe a bit less.';
+                }
+            }else if(wrong_choices<10){
+                if(Math.abs(difference)<1000){
+                    message = 'You are less than 1000 away.';
+                }else if(difference>0){
+                    message = 'Still wrong, however. It could be.. a bit more.';
+                }else{
+                    message = 'Still wrong, however. It could be.. a bit less.';
+                }
+            }else{
+                if(Math.abs(difference)<10){
+                    if(difference>0){
+                        message = 'You can do it. Just a tiny bit more.';
+                    }else{
+                        message = 'You can do it. Just a tiny bit less.';
+                    }
+                }else if(Math.abs(difference)<100){
+                    if(difference>0){
+                        message = 'You are almost there. Just a little bit more.';
+                    }else{
+                        message = 'You are almost there. Just a little bit less.';
+                    }
+                }else if(difference>0){
+                    message = 'Still quite far away. Perhaps.. a bit more.';
+                }else{
+                    message = 'Still quite far away. Perhaps.. a bit less.';
+                }
+            }
+        }else{
+            message = 'Good job! It was, indeed, '+chosen_number+'.<br>You have done it in '+wrong_choices+' guesses.';
+            document.getElementById('guess_box').innerHTML = "";
+            
+            var audio = new Audio( 'win.ogg' );
+            audio.play();
+        }
+        
+        refresh();
+    }
+
+    //hints
+        function hints_on(){
+            var audio = new Audio( '../assets/click.mp3' );
+            audio.play();
+            
+            hints = document.getElementById('hints_button').checked;
+            refresh_hint();
+        }
+
+        function refresh_hint(){
+            if(hints == 0){
+                document.getElementById('hints').innerHTML = "";
+            }else{
+                var bestidea = Math.round((parseInt(highest)+parseInt(lowest))/2);
+                document.getElementById('hints').innerHTML = "Somewhere between.. "+lowest+" and "+highest+"..<br><small>"+bestidea+" might be a good choice.</small>";
+            }
+        }
+</script>
+
+</body>
+</html>
