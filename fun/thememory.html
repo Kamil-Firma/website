@@ -1,0 +1,239 @@
+<html>
+    <head>
+        <title>the memory.</title>
+        <link rel="icon" href="../assets/favicon.png">
+        <style>
+            body {
+                background-image: url("../assets/space.gif");
+                color: white;
+                font-family: 'Comic Sans MS';
+            }
+            #ui {
+                text-align: center;
+                padding: 20px;
+                font-size: 30;
+            }
+            #board {
+                border: solid 1px white;
+                width: 430;
+                height: 430;
+                padding: 10px;
+                background-image: url("../assets/space2.gif");
+            }
+            #board > img {
+                border-radius: 20px;
+                opacity: 80%;
+            }
+            #board > img:hover {
+                border-radius: 10px;
+                opacity: 100%;
+            }
+            button {
+                padding: 5;
+                font-family: 'Comic Sans MS';
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ui"></div>
+        <center>
+            <div id="playmusicbutton">
+                <button onclick="playmusic()">PLAY MUSIC</button><br><br><br>
+            </div>
+            <div id="board"></div>
+        </center>
+
+        <audio id="music_base" loop>
+            <source src="memory_base.ogg" type="audio/ogg">
+        </audio>
+        <audio id="music_good" loop>
+            <source src="memory_good.ogg" type="audio/ogg">
+        </audio>
+        <audio id="music_bad" loop>
+            <source src="memory_bad.ogg" type="audio/ogg">
+        </audio>
+        <audio id="music_victory" loop>
+            <source src="memory_victory.ogg" type="audio/ogg">
+        </audio>
+        <audio id="music_failure" loop>
+            <source src="memory_failure.ogg" type="audio/ogg">
+        </audio>
+
+        <script>
+            //functions
+            function shuffle_array(array) {
+                for (var i = array.length - 1; i >= 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+            function clamp(value, min_value, max_value){
+                return Math.min(Math.max(value, min_value), max_value);
+            }
+
+            //ui
+            guesses = 0;
+            guesses_max = 20;
+
+            over = 0;
+
+            //guys
+            images = ["baikal seal.jpg",
+                "bearded seal.jpg",
+                "caribbean monk seal.jpg",
+                "gray seal.jpg",
+                "guadalupe fur seal.jpg",
+                "harbor seal.png",
+                "hooded seal.jpg",
+                "japanese sea lion.jpg",
+                "new zealand sea lion.jpg",
+                "northern fur seal.jpg",
+                "ribbon seal.jpg",
+                "ringed seal.jpg",
+                "ross seal.jpg",
+                "spotted seal 2.jpg",
+                "spotted seal.jpg",
+                "walrus 2.jpg",
+                "walrus.jpg"];
+            shuffle_array(images);
+            images = images.slice(0,8);
+            images = images.concat(images);
+            shuffle_array(images);
+
+            knows = [];
+            show = [];
+
+            function refreshboard() {
+                var towrite = "";
+                var howmanyknows = 0;
+                for(i=0; i<16; i++){
+                    var newimage = "question.jpg"
+                    if(show[i]==1 || knows[i]==1){
+                        newimage = images[i];
+                    }
+                    towrite += "<img src='" + newimage + "' width=100 height=100 onclick='clickimg(" + i + ")'>;";
+                    
+                    if(knows[i]==1){
+                        howmanyknows ++;
+                    }
+                }
+                document.getElementById("board").innerHTML = towrite;
+                document.getElementById("ui").innerHTML = (guesses_max-guesses) + " GUESSES LEFT.";
+
+                if(guesses>=guesses_max){
+                    document.getElementById("ui").innerHTML = "FAILURE.";
+                    over = -1;
+                }
+                if(howmanyknows>=16){
+                    document.getElementById("ui").innerHTML = "WIN!";
+                    over = 1;
+                }
+            }
+
+            guess_turn = 0;
+            current_guess = -1;
+            show_wrong = 0;
+            last_good = 0;
+            function clickimg(id) {
+                if(knows[id]!=1 && show_wrong==0 && over==0){
+                    if(guess_turn==0){
+                        current_guess = id;
+                        show[id] = 1;
+                        console.log("first guess: "+id+" ("+images[id]+")");
+                        guess_turn++;
+                    }else if(guess_turn==1 && current_guess!=id){
+                        if( images[current_guess] == images[id] ){
+                            knows[id] = 1;
+                            knows[current_guess] = 1;
+                            console.log("second guess: "+id+" ("+images[id]+"). CORRECT.");
+                            last_good = 1;
+                        }else{
+                            show[id] = 1;
+                            show[current_guess] = 1;
+                            showwrong();
+                            console.log("second guess: "+id+" ("+images[id]+"). WRONG.");
+                            guesses++;
+                            last_good = -1;
+                        }
+                        guess_turn = 0;
+                    }
+                    var audio = new Audio( '../assets/click.mp3' );
+                    audio.play();
+                    refreshboard();
+                }
+            }
+            function showwrong(){
+                if(show_wrong==0){
+                    refreshboard();
+                }
+                show_wrong++
+
+                if(show_wrong>=120){
+                    show_wrong = 0;
+                    show = [];
+                    refreshboard();
+                }else{
+                    setTimeout(showwrong, 5);
+                }
+            }
+
+            //music
+            played_music = 0;
+            music_layer_list = ["music_base", "music_good", "music_bad", "music_victory", "music_failure"];
+
+            function playmusic(){
+                if(played_music==0){
+                    for(i=0; i<5; i++){
+                        document.getElementById(music_layer_list[i]).autoplay = true;
+                        document.getElementById(music_layer_list[i]).load();
+                    }
+                    played_music = 1;
+                    setTimeout(align_music, 200);
+                    document.getElementById('playmusicbutton').innerHTML = "";
+                }
+            }
+            music_volumes = [1, 0, 0, 0, 0];
+            function refresh_music(){
+                for(i=0; i<5; i++){
+                    music_volumes[i] = clamp(music_volumes[i], 0, 0.5);
+                    document.getElementById(music_layer_list[i]).volume = music_volumes[i];
+                }
+
+                if(last_good==1 && over==0){
+                    music_volumes[1] += 0.01;
+                }else{
+                    music_volumes[1] -= 0.01;
+                }
+                
+                if(last_good==-1 && over==0){
+                    music_volumes[2] += 0.01;
+                }else{
+                    music_volumes[2] -= 0.01;
+                }
+
+                if(over==1){
+                    music_volumes[3] += 0.01;
+                }else{
+                    music_volumes[3] -= 0.01;
+                }
+
+                if(over==-1){
+                    music_volumes[4] += 0.01;
+                }else{
+                    music_volumes[4] -= 0.01;
+                }
+                setTimeout(refresh_music, 5);
+            }
+            function align_music(){
+                var basetime = document.getElementById(music_layer_list[0]).currentTime;
+                for(i=1; i<5; i++){
+                    document.getElementById(music_layer_list[i]).currentTime = basetime;
+                }
+            }
+            refreshboard();
+            refresh_music();
+        </script>
+    </body>
+</html>
