@@ -97,8 +97,10 @@
                 "spotted seal.jpg",
                 "walrus 2.jpg",
                 "walrus.jpg"];
+            how_many_cards = 8;
+
             shuffle_array(images);
-            images = images.slice(0,8);
+            images = images.slice(0,how_many_cards);
             images = images.concat(images);
             shuffle_array(images);
 
@@ -108,7 +110,7 @@
             function refreshboard() {
                 var towrite = "";
                 var howmanyknows = 0;
-                for(i=0; i<16; i++){
+                for(i=0; i<how_many_cards*2; i++){
                     var newimage = "question.jpg"
                     if(show[i]==1 || knows[i]==1){
                         newimage = images[i];
@@ -126,7 +128,7 @@
                     document.getElementById("ui").innerHTML = "FAILURE.";
                     over = -1;
                 }
-                if(howmanyknows>=16){
+                if(howmanyknows>=how_many_cards*2){
                     document.getElementById("ui").innerHTML = "WIN!";
                     over = 1;
                 }
