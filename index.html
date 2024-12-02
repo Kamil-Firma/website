@@ -251,6 +251,7 @@
         <br>
         <a href='fun/fun.html'>have fun</a>
     </div>
+    <div id="snowfooter"></div>
     </center>
     <br><br><br>
 
@@ -369,6 +370,7 @@
             document.getElementById('highlight_sparkles1').src = "assets/christmas/christmastree.gif";
             document.getElementById('highlight_sparkles2').src = "assets/christmas/christmastree.gif";
             document.getElementById('rabbitdud').src = "assets/christmas/christmas_rabbitdud.png";
+            document.getElementById('snowfooter').innerHTML = "<img src='assets/christmas/snow_footer.gif' width=100%>";
             
             //spawn snow
             var spawn_snow = "";
@@ -383,7 +385,7 @@
 
         function snow_sim(){
             scrollpos = document.body.scrollTop;
-            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-200);
+            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-300);
 
             for(i=0; i<snowflake_amount; i++){
                 document.getElementById('snowflake'+i).style.left = snowflake_pos[i][0] + Math.sin(snowflake_time*0.01+snowflake_spd[i])*10;
