@@ -71,9 +71,19 @@
         .impact_text {
             font-family: Impact; font-size: 50px;
         }
+        button {
+            padding: 2px;
+            font-family: 'Comic Sans MS';
+        }
+
+        #snow {
+            position: absolute;
+        }
     </style>
 </head>
 <body>
+    <!-- christmas snow -->
+    <div id="snow"></div>
     <!-- logo -->
     <div id="logo">
         <center>
@@ -84,7 +94,7 @@
     <!-- links -->
     <div id="links">
         <img src="assets/links.gif" width="200">
-        <br><br>
+        <br><br><br><br>
         <center>
             <div id="link_tree">
                 <ul>
@@ -118,16 +128,18 @@
     </div>
     <br>
     <marquee scrollamount=6>
-        <img src="assets/rabbitdud.png" onclick='play_theme()'>
+        <img src="assets/rabbitdud.png" onclick='play_theme()' id="rabbitdud">
     </marquee>
     <br><br><br>
 
     <!-- highlight -->
     <center>
     <div id="highlight">
-        <img src='assets/tinysparkle.gif' width=50>
-        <img src="assets/highlight.png" width=400>
-        <img src='assets/tinysparkle.gif' width=50>
+        <div id="highlight_banner">
+            <img src='assets/tinysparkle.gif' width=50 id="highlight_sparkles1">
+            <img src="assets/highlight.png" width=400>
+            <img src='assets/tinysparkle.gif' width=50 id="highlight_sparkles2">
+        </div>
         <hr>
         <table><tr>
             <td>
@@ -239,6 +251,7 @@
         <br>
         <a href='fun/fun.html'>have fun</a>
     </div>
+    <button onclick="load_christmas()">experimental mode</button>
     </center>
     <br><br><br>
 
@@ -267,7 +280,12 @@
         played_theme = 0;
         function play_theme(){
             if(played_theme==0){
-                var audio = new Audio( 'assets/theme.mp3' );
+                var audio = "";
+                if(christmas==0){
+                    audio = new Audio( 'assets/theme.mp3' );
+                }else{
+                    audio = new Audio( 'assets/christmas/theme_christmas.ogg' );
+                }
                 audio.play();
                 played_theme = 1;
                 document.getElementById("piano").style.display = "block";
@@ -324,6 +342,62 @@
             audio.play();
         }
 
+        //christmas -------------------------------------------------------------------------------------------------------------------------
+        christmas = 0;
+        snowflake_amount = 70;
+        snowflake_time = 0;
+        page_height = document.body.scrollHeight;
+
+        snowflake_pos = [];
+        snowflake_spd = [];
+        scrollpos = document.body.scrollTop;
+
+        if(christmas==1){
+            load_christmas();
+        }
+
+        function load_christmas(){
+            christmas = 1;
+            
+            //document changes
+            document.body.style.borderImage = "url('assets/christmas/border3.gif') 30 / 19px round";
+            document.body.style.backgroundImage = "url('assets/christmas/stars.gif')";
+            document.getElementById('logo').style.filter = "hue-rotate(200deg)";
+            document.getElementById('link_tree').style.border = "2px dashed green";
+            document.getElementById('about_tree').style.border = "2px dashed green";
+            document.getElementById('highlight').style.border = "2px dashed green";
+            document.getElementById('projects_tree').style.border = "2px dashed green";
+            document.getElementById('highlight_sparkles1').src = "assets/christmas/christmastree.gif";
+            document.getElementById('highlight_sparkles2').src = "assets/christmas/christmastree.gif";
+            document.getElementById('rabbitdud').src = "assets/christmas/christmas_rabbitdud.png";
+            
+            //spawn snow
+            var spawn_snow = "";
+            for(i=0; i<snowflake_amount; i++){
+                spawn_snow += "<img src='assets/christmas/snowflake.gif' width="+rng(10,20)+" style='opacity:60%;position:absolute;' id='snowflake"+i+"'>";
+                snowflake_pos[i] = [rng(100,1820), rng(100,980)];
+                snowflake_spd[i] = rng(20, 60)*0.01;
+            }
+            document.getElementById('snow').innerHTML = spawn_snow;
+            snow_sim();
+        }
+
+        function snow_sim(){
+            scrollpos = document.body.scrollTop;
+            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-200);
+
+            for(i=0; i<snowflake_amount; i++){
+                document.getElementById('snowflake'+i).style.left = snowflake_pos[i][0] + Math.sin(snowflake_time*0.01+snowflake_spd[i])*10;
+                document.getElementById('snowflake'+i).style.top = snowflake_pos[i][1];
+                snowflake_pos[i][1] += snowflake_spd[i];
+                if(snowflake_pos[i][1]>=1080){
+                    snowflake_pos[i][0] = rng(100,1820);
+                    snowflake_pos[i][1] = -50;
+                }
+            }
+            snowflake_time++;
+            setTimeout(snow_sim, 5);
+        }
     </script>
 </body>
 </html>
