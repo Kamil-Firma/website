@@ -385,7 +385,7 @@
 
         function snow_sim(){
             scrollpos = document.body.scrollTop;
-            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-300);
+            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-900);
 
             for(i=0; i<snowflake_amount; i++){
                 document.getElementById('snowflake'+i).style.left = snowflake_pos[i][0] + Math.sin(snowflake_time*0.01+snowflake_spd[i])*10;
