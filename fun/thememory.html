@@ -38,8 +38,12 @@
         <div id="ui"></div>
         <center>
             <div id="playmusicbutton">
-                <button onclick="playmusic()">PLAY MUSIC</button><br><br><br>
+                <button onclick="playmusic()">PLAY MUSIC</button>
             </div>
+            <div id="hardmodebutton">
+                <button onclick="play_hardmode()">TURN ON HARD MODE</button>
+            </div>
+            <br><br>
             <div id="board"></div>
         </center>
 
@@ -76,7 +80,6 @@
             //ui
             guesses = 0;
             guesses_max = 10;
-
             over = 0;
 
             //guys
@@ -98,7 +101,6 @@
                 "walrus 2.jpg",
                 "walrus.jpg"];
             how_many_cards = 8;
-
             shuffle_array(images);
             images = images.slice(0,how_many_cards);
             images = images.concat(images);
@@ -236,6 +238,25 @@
             }
             refreshboard();
             refresh_music();
+
+            //hard mode
+            hardmode = 1;
+            hardmode_time = 0;
+            function hardmode_rotate() {
+                if(hardmode){
+                    document.getElementById('board').style.rotate = hardmode_time+'deg';
+                    document.getElementById('board').style.position = 'absolute';
+                    document.getElementById('board').style.left = 730 + Math.sin(hardmode_time*0.3)*100;
+                    document.getElementById('board').style.top = 200 + Math.sin(hardmode_time*0.5)*50;
+                    hardmode_time += 0.05;
+                    setTimeout(hardmode_rotate, 5);
+                }
+            }
+            function play_hardmode() {
+                hardmode = 1;
+                document.getElementById('hardmodebutton').innerHTML = "";
+                hardmode_rotate();
+            }
         </script>
     </body>
 </html>
