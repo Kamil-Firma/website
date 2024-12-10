@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <style>
+            img {
+                object-fit: cover;
+                object-position: 0 0;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg0">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg1">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg2">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg3">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg4">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg5">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg6">
+        <img src="baikal seal.jpg" width="900px" height="900px" id="slideimg7">
+        <script>
+            for(i=0; i<=7; i++){
+                var row = i%3;
+                var column = Math.floor(i/3);
+
+                var start_x = row*33;
+                var start_y = column*33;
+                document.getElementById('slideimg'+i).style.clipPath = 'xywh('+start_x+'% '+start_y+'% 33% 33%)';
+            }
+        </script>
+    </body>
+</html>

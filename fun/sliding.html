@@ -1,0 +1,290 @@
+<html>
+    <head>
+        <title>sliding.</title>
+        <link rel="icon" href="../assets/favicon.png">
+        <style>
+            body {
+                background-image: url("../assets/space.gif");
+                color: white;
+                font-family: 'Comic Sans MS';
+            }
+            #board {
+                border: 5px white solid;
+                width: 900px;
+                height: 900px;
+                padding: 10px;
+            }
+            .slides {
+                object-fit: cover;
+                object-position: 0 0;
+                position: absolute;
+                cursor: pointer;
+            }
+            .slides:hover {
+                filter: invert(100%);
+            }
+            #win {
+                position: absolute;
+                right: 500;
+                top: 100;
+                font-size: 70px;
+            }
+            #playmusicbutton {
+                position: absolute;
+                right: 400;
+                top: 300;
+            }
+            #playmusicbutton button {
+                padding: 50px;
+                font-size: 20px;
+                font-family: 'Comic Sans MS';
+            }
+ 
+            #debug {
+                position: absolute;
+                right: 50;
+                top: 50;
+            }
+            #debug2 {
+                position: absolute;
+                right: 300;
+                top: 50;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="win"></div>
+        <div id="board"></div>
+        <div id="playmusicbutton">
+            <button onclick="playmusic()">PLAY MUSIC</button>
+        </div>
+        
+        <div id="debug"></div>
+        <div id="debug2"></div>
+        <audio id="music" loop>
+            <source src="sliding_loop.ogg" type="audio/ogg">
+        </audio>
+ 
+        <script>
+            function clamp(value, min_value, max_value){
+                return Math.min(Math.max(value, min_value), max_value);
+            }
+            function rng(min, max){
+                return Math.round(Math.random() * (max - min) + min);
+            }
+            function shuffle(array){
+                let currentIndex = array.length;
+                while (currentIndex != 0) {
+                    let randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+                }
+            }
+            function lerp(a, b, time){
+                return ( a + (b - a) * time );
+            }
+ 
+            //setup
+            images = ["baikal seal.jpg",
+                "bearded seal.jpg",
+                "caribbean monk seal.jpg",
+                "gray seal.jpg",
+                "guadalupe fur seal.jpg",
+                "harbor seal.png",
+                "hooded seal.jpg",
+                "japanese sea lion.jpg",
+                "new zealand sea lion.jpg",
+                "northern fur seal.jpg",
+                "ribbon seal.jpg",
+                "ringed seal.jpg",
+                "ross seal.jpg",
+                "spotted seal 2.jpg",
+                "spotted seal.jpg",
+                "walrus 2.jpg",
+                "walrus.jpg"];
+            chosen_guy = images[rng(0, images.length-1)];
+ 
+            //drawing
+            to_add = "";
+            for(i=0; i<8; i++){
+                to_add += '<img src="'+chosen_guy+'" width="900px" height="900px" class="slides" id="slideimg'+i+'" onclick="moveslide('+i+')" onmouseover="hoverslide('+i+')">';
+            }
+            document.getElementById('board').innerHTML = to_add;
+ 
+            for(i=0; i<8; i++){
+                var row = i%3;
+                var column = Math.floor(i/3);
+ 
+                var start_x = row*33;
+                var start_y = column*33;
+                document.getElementById('slideimg'+i).style.clipPath = 'xywh('+start_x+'% '+start_y+'% 33% 33%)';
+            }
+ 
+            //moving
+            preshuffle_array = [0, 1, 2, 3, 4, 5, 6, 7, -1];
+            shuffle(preshuffle_array);
+            places = [
+                [preshuffle_array[0], preshuffle_array[1], preshuffle_array[2]],
+                [preshuffle_array[3], preshuffle_array[4], preshuffle_array[5]],
+                [preshuffle_array[6], preshuffle_array[7], preshuffle_array[8]],
+            ];
+            win = 0;
+ 
+            function draw_debug_table(){
+                var newadd = "<table>";
+                for(column=0; column<3; column++){
+                    newadd += "<tr>";
+                    for(row=0; row<3; row++){
+                        newadd += "<td>";
+                        newadd += places[column][row];
+                        newadd += "</td>";
+                    }
+                    newadd += "</tr>";
+                }
+                newadd += "</table>";
+                document.getElementById('debug').innerHTML = newadd;
+            }
+ 
+            win_sine = 0;
+            function frame(){
+                for(column=0; column<3; column++){
+                    for(row=0; row<3; row++){
+                        var cur_id = places[column][row];
+                        if(cur_id != -1){
+                            if(cur_id%3==0){
+                                var hor_offset = 0;
+                            }else if(cur_id%3==1){
+                                var hor_offset = -300;
+                            }else{
+                                var hor_offset = -600;
+                            }
+                            if(cur_id<3){
+                                var ver_offset = 0;
+                            }else if(cur_id<6){
+                                var ver_offset = -300;
+                            }else{
+                                var ver_offset = -600;
+                            }
+ 
+                            var addtowinsine_x = 0;
+                            var addtowinsine_y = 0;
+                            if(win==1){
+                                addtowinsine_x = Math.sin(win_sine*0.05+ column*5)*35;
+                                addtowinsine_y = Math.sin(win_sine*0.05+ row*5)*20;
+                            }
+ 
+                            var target_x = 27 + hor_offset + row*300;
+                            var target_y = 27 + ver_offset + column*300;
+
+                            document.getElementById('slideimg'+cur_id).style.left = target_x + addtowinsine_x;
+                            document.getElementById('slideimg'+cur_id).style.top = target_y + addtowinsine_y;
+                            document.getElementById('win').style.top = 100+addtowinsine_y;
+                        }
+                    }
+                }
+ 
+                //draw_debug_table();
+                setTimeout(frame, 5);
+            }
+            frame();
+ 
+            function moveslide(id){
+                if(win==0){
+                    var pressed_x = 0;
+                    var pressed_y = 0;
+                    var empty_x = 0;
+                    var empty_y = 0;
+ 
+                    for(column=0; column<3; column++){
+                        for(row=0; row<3; row++){
+                            if( places[column][row] == id ){
+                                pressed_x = row;
+                                pressed_y = column;
+                            }
+                        }
+                    }
+                    for(column=0; column<3; column++){
+                        for(row=0; row<3; row++){
+                            if( places[column][row] == -1 ){
+                                empty_x = row;
+                                empty_y = column;
+                            }
+                        }
+                    }
+                    var next_to_empty = 0;
+                    if(pressed_x == empty_x && Math.abs(pressed_y-empty_y) <= 1){
+                        next_to_empty = 1;
+                    }else if(pressed_y == empty_y && Math.abs(pressed_x-empty_x) <= 1){
+                        next_to_empty = 1;
+                    }
+ 
+                    if(next_to_empty == 1){
+                        places[empty_y][empty_x] = id;
+                        places[pressed_y][pressed_x] = -1;
+                        var audio = new Audio( 'slide.ogg' );
+                        audio.play();
+                    }
+                }
+ 
+                //check for win
+                var mistakes = 0;
+                var current_slot = -1;
+                if(win==0){
+                    for(column=0; column<3; column++){
+                        for(row=0; row<3; row++){
+                            current_slot ++;
+                            if( column==2 && row==2 && places[column][row] == -1 ){
+                                //checking if bottom right is empty
+                            }else if( places[column][row] != current_slot ){
+                                mistakes ++;
+                            }
+                        }
+                    }
+                    if(mistakes==0){
+                        win = 1;
+                        document.getElementById('win').innerHTML = 'win';
+                        win_anim();
+                    }
+                }
+            }
+ 
+            function hoverslide(id){
+                var empty_x = 0;
+                var empty_y = 0;
+                for(column=0; column<3; column++){
+                    for(row=0; row<3; row++){
+                        if( places[column][row] == -1 ){
+                            empty_x = row;
+                            empty_y = column;
+                        }
+                    }
+                }
+                //document.getElementById('debug2').innerHTML = "current id: "+id+"<br>empty: "+empty_x+", "+empty_y;
+            }
+ 
+            played_winjingle = 0;
+            function win_anim(){
+                win_sine ++;
+                setTimeout(win_anim, 5);
+
+                if(played_winjingle==0 && played_music==1){
+                    var audio = new Audio( 'sliding_win.ogg' );
+                    audio.play();
+                    document.getElementById('music').pause();
+                    played_winjingle = 1;
+                }
+            }
+
+            played_music = 0;
+            function playmusic(){
+                if(played_music==0){
+                    document.getElementById('music').autoplay = true;
+                    document.getElementById('music').load();
+                    played_music = 1;
+                    document.getElementById('playmusicbutton').innerHTML = "";
+                }
+            }
+        </script>
+    </body>
+</html>
