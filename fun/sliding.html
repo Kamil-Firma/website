@@ -123,7 +123,8 @@
  
             //moving
             preshuffle_array = [0, 1, 2, 3, 4, 5, 6, 7, -1];
-            shuffle(preshuffle_array);
+            //shuffling array \/\/\/\/ .. this makes an impossible board some of the time. check the bottom of the script for the new solution
+            //shuffle(preshuffle_array);
             places = [
                 [preshuffle_array[0], preshuffle_array[1], preshuffle_array[2]],
                 [preshuffle_array[3], preshuffle_array[4], preshuffle_array[5]],
@@ -218,33 +219,44 @@
                     }else if(pressed_y == empty_y && Math.abs(pressed_x-empty_x) <= 1){
                         next_to_empty = 1;
                     }
- 
-                    if(next_to_empty == 1){
+                    
+                    var isntpressingliterallyempty = 0;
+                    if( pressed_x==empty_x && pressed_y==empty_y ){
+
+                    }else{
+                        isntpressingliterallyempty = 1;
+                    }
+
+                    if(next_to_empty == 1 && isntpressingliterallyempty == 1){
                         places[empty_y][empty_x] = id;
                         places[pressed_y][pressed_x] = -1;
-                        var audio = new Audio( 'slide.ogg' );
-                        audio.play();
+                        if(shuffled==1){
+                            var audio = new Audio( 'slide.ogg' );
+                            audio.play();
+                        }
                     }
                 }
  
                 //check for win
-                var mistakes = 0;
-                var current_slot = -1;
-                if(win==0){
-                    for(column=0; column<3; column++){
-                        for(row=0; row<3; row++){
-                            current_slot ++;
-                            if( column==2 && row==2 && places[column][row] == -1 ){
-                                //checking if bottom right is empty
-                            }else if( places[column][row] != current_slot ){
-                                mistakes ++;
+                if(shuffled==1){
+                    var mistakes = 0;
+                    var current_slot = -1;
+                    if(win==0){
+                        for(column=0; column<3; column++){
+                            for(row=0; row<3; row++){
+                                current_slot ++;
+                                if( column==2 && row==2 && places[column][row] == -1 ){
+                                    //checking if bottom right is empty
+                                }else if( places[column][row] != current_slot ){
+                                    mistakes ++;
+                                }
                             }
                         }
-                    }
-                    if(mistakes==0){
-                        win = 1;
-                        document.getElementById('win').innerHTML = 'win';
-                        win_anim();
+                        if(mistakes==0){
+                            win = 1;
+                            document.getElementById('win').innerHTML = 'win';
+                            win_anim();
+                        }
                     }
                 }
             }
@@ -285,6 +297,16 @@
                     document.getElementById('playmusicbutton').innerHTML = "";
                 }
             }
+
+            //shuffling - take 2
+            shuffled = 0;
+            for(i=0; i<100; i++){
+                moveslide(rng(0,7));
+                console.log('shuffling: '+i);
+                frame();
+            }
+            console.log('i have finished shuffling. thank you.');
+            shuffled = 1;
         </script>
     </body>
 </html>
