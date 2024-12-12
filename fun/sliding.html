@@ -191,6 +191,7 @@
             frame();
  
             function moveslide(id){
+                //console.log('move: '+id);
                 if(win==0){
                     var pressed_x = 0;
                     var pressed_y = 0;
@@ -300,12 +301,18 @@
 
             //shuffling - take 2
             shuffled = 0;
-            for(i=0; i<100; i++){
+            lastmove = 8;
+            for(i=0; i<200; i++){
+                var wanttomove = rng(0,7);
+                while(wanttomove==lastmove){
+                    wanttomove = rng(0,7);
+                }
                 moveslide(rng(0,7));
-                console.log('shuffling: '+i);
+                console.log('shuffling: '+wanttomove+" (last: "+lastmove+")");
+                lastmove = wanttomove;
                 frame();
             }
-            console.log('i have finished shuffling. thank you.');
+            //console.log('i have finished shuffling. thank you.');
             shuffled = 1;
         </script>
     </body>
