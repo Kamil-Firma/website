@@ -1,0 +1,372 @@
+<html>
+    <head>
+        <title>find.</title>
+        <link rel="icon" href="../assets/favicon.png">
+        <style>
+            body {
+                background-image: url("../assets/space.gif");
+                color: white;
+                font-family: 'Comic Sans MS';
+            }
+            table, td {
+                border: 1px solid;
+            }
+            td {
+                text-align: center;
+                width: 120px;
+                height: 120px;
+                cursor: pointer;
+            }
+            .guys {
+                width: 120px;
+                height: 120px;
+            }
+            button {
+                font-size: 20;
+                font-family: 'Comic Sans MS';
+                background-color: cyan;
+            }
+
+            #instructions {
+                width: 50%;
+                height: 140;
+                float: left;
+            }
+            #statusbar {
+                width: 50%;
+                height: 140;
+                float: right;
+                font-size: 35;
+            }
+            #board {
+                width: 50%;
+                float: left;
+            }
+            #side {
+                width: 40%;
+                float: left;
+                font-size: 35;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="instructions">
+        <h3><ul>
+            <li>Find "The Walrus".</li>
+            <li>Click to ask a question.</li>
+            <li>You can only ask one question per person.</li>
+            <li><div id="musicbutton"><button onclick="playmusic()">PLAY MUSIC</button></div></li>
+        </ul></h3>
+        </div>
+        <div id="statusbar">PLACEHOLDER</div>
+
+        <hr>
+        <div id="board"></div>
+        <div id="side"></div>
+
+        <audio id="music" loop autoplay>
+            <source src="find.ogg" type="audio/ogg">
+        </audio>
+
+        <script>
+            // calculation functions
+            function random_range(min, max){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            function random_from_array(array){
+                return array[random_range(0, array.length-1)];
+            }
+            function clamp(value, min_value, max_value){
+                return Math.min(Math.max(value, min_value), max_value);
+            }
+            // game functions
+            function update_board(){
+                var mytext = "<table>";
+                for(i=0; i<rows; i++){
+                    mytext += "<tr>";
+                    for(k=0; k<columns; k++){
+                        var myspot = k + i*rows;
+                        var mydata = board_state[myspot];
+                        var myimg = "../assets/projects/question.gif";
+                        if( mydata[1]==1 ){
+                            myimg = mydata[0];
+                        }
+                        var myopacity = 100;
+                        if( myspot!=selected ){
+                            myopacity = 50;
+                        }
+                        //for walrus reveal
+                        var idtext = "";
+                        if( final_guess!=-1 && myspot==walrus_pos ){
+                            myimg = "walrus.jpg"
+                            idtext = " id='thewalrus' "
+                        }
+                        //setting the text
+                        mytext += "<td id='spot"+String(myspot)+"' onclick='clicked("+String(myspot)+")'>";
+                        mytext += "<img class='guys' "+idtext+" src='"+myimg+"' style='opacity:"+String(myopacity)+"%'>";
+                        mytext += "</td>";
+                    }
+                    mytext += "</tr>";
+                }
+                mytext += "</table>";
+                document.getElementById("board").innerHTML = mytext;
+
+                if( questions_left>0 ){
+                    document.getElementById("statusbar").innerHTML = "QUESTIONS LEFT: "+String(questions_left);
+                }else if(final_guess==-1){
+                    document.getElementById("statusbar").innerHTML = "ENOUGH! WHO'S THE WALRUS?";
+                }else if(final_guess==walrus_pos){
+                    document.getElementById("statusbar").innerHTML = "CONGRATULATIONS YOU FOUND THE WALRUS!";
+                }else if(final_guess!=walrus_pos){
+                    document.getElementById("statusbar").innerHTML = "NOT THE WALRUS. GAME OVER";
+                }
+            }
+            // the guys!
+            img_guys = [
+                "baikal seal.jpg",
+                "bearded seal.jpg",
+                "caribbean monk seal.jpg",
+                "gray seal.jpg",
+                "guadalupe fur seal.jpg",
+                "harbor seal.png",
+                "hooded seal.jpg",
+                "japanese sea lion.jpg",
+                "new zealand sea lion.jpg",
+                "northern fur seal.jpg",
+                "ribbon seal.jpg",
+                "ringed seal.jpg",
+                "ross seal.jpg",
+                "spotted seal 2.jpg",
+                "spotted seal.jpg"
+            ];
+            function get_flavor_text() {
+                flavor = "";
+                name_first = [
+                    "Funny",
+                    "Big",
+                    "Small",
+                    "Tired",
+                    "Angry",
+                    "Happy",
+                    "Blue",
+                    "Green",
+                    "Powerful",
+                    "Awful",
+                    "Terrible",
+                    "Awesome",
+                    "Fantastic",
+                    "Just",
+                    "Tall",
+                    "Tiny",
+                    "Defeated",
+                    "Wonderful",
+                    "Thankful",
+                    "Thankfulled",
+                    "Unfortunate",
+                    "Fortunate",
+                    "Ringed",
+                    "Spotted",
+                    "Found",
+                    "General",
+                    "Captain",
+                    "A",
+                    "anything but",
+                    "So",
+                    "Familiar",
+                    "Unknown",
+                    "Hellish",
+                    "Hungry",
+                    "Greedy",
+                    "Forgetful",
+                    "Forgetless",
+                    "Yours Faithfully,",
+                    "Free",
+                    "Truly Free",
+                    "Atlantic Golden",
+                ]
+                name_second = [
+                    "Seal",
+                    "Guy",
+                    "Nobody",
+                    "Person",
+                    "Jim",
+                    "Frank",
+                    "Pal",
+                    "Friend",
+                    "Andrew",
+                    "Paul",
+                    "Benjamin",
+                    "Michael",
+                    "Dollar",
+                    "i forgot",
+                    "Steve",
+                    "Money",
+                    "Unnamed",
+                    "Unknown",
+                    "Sea Lion",
+                    "Square",
+                    "Red",
+                    "Blue",
+                ]
+                flavors = [
+                    "They call me "+random_from_array(name_first)+" "+random_from_array(name_second)+"!",
+                    "Hello! It's me! "+random_from_array(name_first)+" "+random_from_array(name_second)+"!",
+                    random_from_array(name_first)+" "+random_from_array(name_second)+" is here to answer your question!",
+                    random_from_array(name_first)+" "+random_from_array(name_second)+".. that's me..",
+                    random_from_array(name_first).toUpperCase()+" "+random_from_array(name_second).toUpperCase()+".. IS ME. I KNOW THE TRUTH.",
+                    "What is up!",
+                    "YEAH!! I can help!!",
+                    "I know exactly who you're looking for.",
+                    "AYAYAY! I KNOW THE WALRUS!",
+                    "The walrus ain't me, maybe!? Only one way to find out!",
+                    "Well, there's a walrus in this room..",
+                    "I'VE SEEN THE NEWS",
+                    "OOPS! Whaddya want?!",
+                    "Hahah! You can never figure out my Walrus-Secret! Unless i tell you!",
+                    "What's the question?!",
+                    "What's the ... question...?",
+                    "You got something to ask?!",
+                    "insert query",
+                    "WHAT'S YOUR DEAL!?"
+                ]
+                return random_from_array(flavors);
+            }
+
+            //game
+            rows = 5;
+            columns = 5;
+            questions_left = 9;
+            final_guess = -1;
+
+            walrus_pos = [];
+            board_state = [];
+            selected = -1;
+            function game_reset(){
+                walrus_pos = random_range(0, rows*columns-1);
+
+                board_state = [];
+                for(i=0; i<columns*rows; i++){
+                    board_state[i] = [
+                        // 0 image
+                        random_from_array(img_guys),
+                        // 1 revealed
+                        1,
+                        // 2 saved question
+                        -1,
+                        // 3 flavortext
+                        get_flavor_text(),
+                        // 4 saved answer
+                        "",
+                    ];
+                }
+                
+                update_board();
+            }
+            function clicked(spot_id){
+                var audio = new Audio( '../assets/click.mp3' );
+                audio.play();
+                board_state[spot_id][1] = 1;
+                selected = spot_id;
+                update_board();
+
+                var sidetext = board_state[spot_id][3];
+                sidetext += "<br><br>";
+                if( board_state[spot_id][2]==-1 && questions_left>0 ){
+                    for(p=0; p<questions.length; p++){
+                        sidetext += "<button onclick='ask("+p+","+spot_id+")'>"+questions[p]+"</button>";
+                        sidetext += "<br>";
+                    }
+                }else if(board_state[spot_id][2]!=-1){
+                    sidetext += "<div style='color:yellow'>";
+                    sidetext += questions[board_state[spot_id][2]];
+                    sidetext += "</div>";
+                    sidetext += board_state[spot_id][4];
+                }
+
+                if( questions_left<=0 && final_guess==-1 ){
+                    sidetext += "<br><br><button onclick='finalwalrus("+spot_id+")'>THIS IS THE WALRUS!</button>";
+                }else if( final_guess!=-1 && spot_id==walrus_pos ){
+                    sidetext += "<br><br>I was the walrus!";
+                }
+                document.getElementById('side').innerHTML = sidetext;
+            }
+            questions = [
+                "Are you the Walrus?",
+                "Is the Walrus in your row?",
+                "Is the Walrus in your column?",
+                "Is the Walrus next to you?",
+            ];
+            function ask(query, spot_id){
+                var text = ""
+
+                if(query==0){
+                    if( spot_id==walrus_pos ){
+                        text = "You got me.";
+                    }else{
+                        text = "NO.";
+                    }
+                }else if(query==1){
+                    if( Math.floor(walrus_pos/5)==Math.floor(spot_id/5) ){ //same x
+                        text = "YES.";
+                    }else{
+                        text = "NO.";
+                    }
+                }else if(query==2){
+                    if( walrus_pos%5==spot_id%5 ){ //same y
+                        text = "YES.";
+                    }else{
+                        text = "NO.";
+                    }
+                }else if(query==3){
+                    if( Math.floor(walrus_pos/5)==Math.floor(spot_id/5) && (spot_id-1==walrus_pos || spot_id+1==walrus_pos) ){ //same x, so check left and right
+                        text = "YES.";
+                    }else if( walrus_pos%5==spot_id%5 && (spot_id-5==walrus_pos || spot_id+5==walrus_pos) ){ //same y, so check above and below
+                        text = "YES.";
+                    }else{
+                        text = "NO.";
+                    }
+                }
+
+                board_state[spot_id][2] = query;
+                board_state[spot_id][4] = text;
+                questions_left --;
+                clicked(spot_id);
+                return text;
+            }
+            function finalwalrus(spot_id){
+                final_guess = spot_id;
+                clicked(spot_id);
+                update_board();
+                endmusic();
+            }
+
+            game_reset();
+
+            function playmusic(){
+                document.getElementById('music').autoplay = true;
+                document.getElementById('music').volume = 0.5;
+                document.getElementById('music').load();
+                document.getElementById('musicbutton').innerHTML = "";
+            }
+            function endmusic(){
+                document.getElementById('music').pause();
+                var audio = new Audio( 'find_jingle.ogg' );
+                audio.play();
+                document.getElementById('musicbutton').innerHTML = "";
+            }
+
+            time = 0;
+            function everyframe(){
+                setTimeout(everyframe, 5);
+                time++;
+                if(final_guess!=-1){
+                    document.getElementById('thewalrus').style.rotate = time+'deg';
+                    document.getElementById('statusbar').style.rotate = 0+'deg';
+                }else if(questions_left<=0){
+                    document.getElementById('statusbar').style.rotate = Math.sin(time*0.05)*2+'deg';
+                }
+            }
+            everyframe();
+        </script>
+    </body>
+</html>
