@@ -368,6 +368,11 @@
         snowflake_amount = 70;
         snowflake_time = 0;
         page_height = document.body.scrollHeight;
+		//deciding if its christmas based on date
+		var curdate = new Date();
+		if( curdate.getMonth()+1==12 && curdate.getDate()>=12 ){
+			christmas = 1;
+		}
 
         snowflake_pos = [];
         snowflake_spd = [];
