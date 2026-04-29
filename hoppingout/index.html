@@ -3,12 +3,21 @@
     <title>Hopping Out</title>
     <link rel="icon" href="../assets/hoppingout/favicon.png">
     <style>
+		@font-face {
+			font-family: 'CS';
+			src: url('../assets/fonts/CyborgSister.woff');
+		}
+		@font-face {
+			font-family: 'DD';
+			src: url('../assets/fonts/DigitalDisco.woff');
+		}
+		
         body {
             background-image: url("../assets/hoppingout/bg.png");
             background-attachment: fixed;
             background-size: cover;
             color: white;
-            font-family: 'CyborgSister';
+            font-family: 'CS';
             font-size: 29px;
         }
         img {
@@ -19,7 +28,7 @@
             text-decoration: none;
             font-size: 28px;
             padding: 5px;
-            font-family: 'DigitalDisco';
+            font-family: 'DD';
             cursor: pointer;
             background-image: url("../assets/hoppingout/grass.png");
             color: white;
@@ -65,13 +74,19 @@
             max-width: 40%;
             margin: 8px;
         }
+		#credits {
+			padding: 10px;
+			background-color: #09212c;
+			font-size: 26px;
+			color: #7595a4;
+		}
     </style>
 </head>
 <body>
     <div id="logo">
         <img id="logo_img" src="../assets/hoppingout/logo.png">
         <br>
-        <a style="font-family:'DigitalDisco'; color:#a8e1f9">RELEASING 2026</a>
+        <a style="font-family:'DD'; color:#a8e1f9">RELEASING 2026</a>
     </div>
     <br>
     <div class="text">
@@ -102,10 +117,21 @@
             <br><br>
         </div>
     </div>
-
-    <br><br>
+	
+    <br>
+	
+	<div style='text-align:center;'>
     <img src="../assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="cursor:pointer;">
     <iframe src="https://store.steampowered.com/widget/4297110/" frameborder="0" width="90%" height="190"></iframe>
+	</div>
+	
+	<br>
+	
+	<div id="credits">
+		Background / key art by Amitz
+		<br>
+		Fonts "CyborgSister" and "DigitalDisco" from fontenddev.com
+	</div>
 
     <script>
         //every frame
