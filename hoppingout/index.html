@@ -1,0 +1,139 @@
+<html>
+<head>
+    <title>Hopping Out</title>
+    <link rel="icon" href="../assets/hoppingout/favicon.png">
+    <style>
+        body {
+            background-image: url("../assets/hoppingout/bg.png");
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'CyborgSister';
+            font-size: 29px;
+        }
+        img {
+            image-rendering: pixelated;
+        }
+
+        .button, .button_big {
+            text-decoration: none;
+            font-size: 28px;
+            padding: 5px;
+            font-family: 'DigitalDisco';
+            cursor: pointer;
+            background-image: url("../assets/hoppingout/grass.png");
+            color: white;
+            border-color: #172810;
+            border-width: 6px;
+            border-style: solid;
+        }
+        .button:hover, .button_big:hover {
+            background-image: url("../assets/hoppingout/grass_countryside.png");
+            border-color: #45620d;
+        }
+        .button_big {
+            font-size: 50px;
+            padding: 10px;
+        }
+
+        #logo {
+            text-align: center;
+            position: relative;
+            padding: 1%;
+        }
+        #logo_img {
+            max-width: 100%;
+            position: relative;
+        }
+        .text {
+            margin: auto;
+            text-align: center;
+            max-width: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        #darksection {
+            background-image: url("../assets/hoppingout/bg_full.png");
+            background-attachment: fixed;
+            background-size: cover;
+            width: 100%;
+            border-top: white 6px solid;
+            border-bottom: white 6px solid;
+        }
+        .gifs {
+            border: white 6px solid;
+            max-width: 40%;
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <img id="logo_img" src="../assets/hoppingout/logo.png">
+        <br>
+        <a style="font-family:'DigitalDisco'; color:#a8e1f9">RELEASING 2026</a>
+    </div>
+    <br>
+    <div class="text">
+        Hopping Out is a tile-based puzzle game where you hop 2 tiles at a time.
+        <br>
+        Play as Frog and use your tongue to move boxes, press buttons to create lily pads, all to catch many flies!
+        <br><br>
+        <a class="button_big" target='_blank' href='https://store.steampowered.com/app/4297110/Hopping_Out/'>PLAY DEMO ON STEAM</a>
+    </div>
+    <br>
+    <div id="darksection">
+        <br>
+        <div class="text">
+            <img class="gifs" src="../assets/hoppingout/desc-wallhit.gif">
+            <img class="gifs" src="../assets/hoppingout/desc-beachcrab.gif">
+            <br>
+            Solve over 180 puzzle levels across 7 worlds to help Frog move out of the busy swamp and live a calm life in the city!
+            <br><br>
+            <a style="color:#86b1ed; font-size:36px;">Features:</a><br>
+            ▪ Hop two tiles, or bump into solid walls to stop yourself mid-jump.<br>
+            ▪ Play around with many elements such as deadly bees, bouncy mushrooms, or fly-luring skunks.<br>
+            ▪ Test your puzzle-solving in difficult bonus levels.<br>
+            ▪ Explore a level select map with integrated puzzles and split paths.<br>
+            ▪ Collect and mix-and-match cosmetics in the wardrobe.<br>
+            <br><br>
+            <a class="button" target='_blank' href='updates'>UPDATES</a>
+            <a class="button" target='_blank' href='../index#links'>CONTACT</a>
+            <br><br>
+        </div>
+    </div>
+
+    <br><br>
+    <img src="../assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="cursor:pointer;">
+    <iframe src="https://store.steampowered.com/widget/4297110/" frameborder="0" width="90%" height="190"></iframe>
+
+    <script>
+        //every frame
+        time = 0;
+        function frame(){
+            time ++;
+            var frame_timeout = setTimeout(frame, 33);
+
+            //logo scaling
+            document.getElementById("logo").style.top = Math.sin(time*0.05)*12;
+
+            //frog croaking
+            var frog_img = "frog.png";
+            if( croak_time>0 ){
+                croak_time --;
+                frog_img = "frog_croak.png";
+            }
+            document.getElementById("croakfrog").src = "../assets/hoppingout/" + frog_img;
+        }
+        frame();
+
+        //croak frog
+        croak_time = 0;
+        function croak_frog(){
+            croak_time = 25;
+            var audio = new Audio( '../assets/hoppingout/sfx_frogcroak.ogg' );
+            audio.play();
+        }
+    </script>
+</body>
+</html>
