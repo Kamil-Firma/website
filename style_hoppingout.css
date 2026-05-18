@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'CS';
+    src: url('assets/fonts/CyborgSister.woff');
+}
+@font-face {
+    font-family: 'DD';
+    src: url('assets/fonts/DigitalDisco.woff');
+}
+
+.frog {
+    background-image: url("assets/hoppingout/bg.png");
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'CS';
+    margin: 0;
+    min-height: 92%;
+    font-size: 1.2em;
+}
+.updates {
+    font-size: 1.8em;
+}
+#froglogo {
+    text-align: center;
+    position: relative;
+    padding: 1%;
+    margin-bottom: 40px;
+}
+#froglogo img {
+    max-width: 100%;
+    position: relative;
+}
+.frogtext {
+    margin: auto;
+    text-align: center;
+    max-width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.frogbutton {
+    font-family: 'DD';
+    padding: 5px;
+
+    text-decoration: none;
+    font-size: 28px;
+    background-image: url("assets/hoppingout/grass.png");
+    color: white;
+
+    border-color: #172810;
+    border-width: 6px;
+    border-style: solid;
+
+    cursor: pointer;
+}
+.frogbutton:hover {
+    background-image: url("assets/hoppingout/grass_countryside.png");
+    border-color: #45620d;
+}
+.frogbuttonbig {
+    font-size: 50px;
+    padding: 10px;
+}
+.frogbutton:link, .frogbutton:visited {
+    color: white;
+}
+
+.text {
+    margin: auto;
+    text-align: center;
+    max-width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 30px;
+}
+.darksection {
+    background-image: url("assets/hoppingout/bg_full.png");
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    border-top: white 6px solid;
+    border-bottom: white 6px solid;
+    margin-bottom: 16px;
+}
+.gifs {
+    border: white 6px solid;
+    max-width: 40%;
+    margin: 8px;
+    cursor: pointer;
+}
+#frogcredits {
+    padding: 10px;
+    background-color: #09212c;
+    font-size: 26px;
+    color: #7595a4;
+    text-align: left;
+    padding-left: 10%;
+    margin-top: 16px;
+}
+
+
+#article {
+    background-image: url("assets/hoppingout/bg_full.png");
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: 70%;
+    border-top: white 6px solid;
+    border-bottom: white 6px solid;
+}
+#article_wrap {
+    padding: 1%;
+}
+#article img {
+    max-width: 70%;
+    border: white 1px dashed;
+    cursor: crosshair;
+    margin: 10px;
+}
+#update_title {
+    font-family: 'DD';
+    font-size: 200%;
+    width: 80%;
+}
+#update_date {
+    position: relative;
+    top: -10;
+    color: #70ed63;
+}
+#update_banner img {
+    max-width: 90%;
+    max-height: 300px;
+    cursor: auto;
+}
+#update_text i {
+    color: #f67c7c;
+}
+.update_load_button {
+    width: 1000px;
+    max-width: 90%;
+    cursor: pointer;
+    background-image: url("assets/hoppingout/grass_dark.png");
+    border: white 1px dashed;
+    margin: 5px;
+    padding-left: 5px;
+}
+.update_load_button:hover {
+    background-image: url("assets/hoppingout/grass_countryside.png");
+}

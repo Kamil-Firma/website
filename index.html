@@ -1,441 +1,317 @@
 <html>
-<head>
-    <title>my website!!</title>
-    <link rel="icon" href="assets/favicon.png">
-    <style>
-        body {
-            background-image: url("assets/space.gif");
-            color: white;
-            font-family: 'Comic Sans MS';
-        }
-        img {
-            image-rendering: pixelated;
-        }
-        a:link {
-            color: ff9afc
-        }
-        a:visited {
-            color: ff9afc
-        }
+    <head>
+        <title>my website!!</title>
+        <link id="favicon" rel="icon" href="assets/favicon.png">
 
-        #logo {
-            position: relative;
-            padding: 150px;
-        }
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
 
-        #links, #about {
-            text-align: center;
-        }
-        #link_tree, #about_tree {
-            background-image: url("assets/space2.gif");
-            background-attachment: fixed;
-
-            width: 450px;
-            border: solid 1px white;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        #highlight {
-            background-image: url("assets/space2.gif");
-            background-attachment: fixed;
-
-            text-align: center;
-            width: 90%;
-            border: solid 1px white;
-            padding: 15px;
-        }
-        .carousel_image {
-            border: solid 1px white;
-            cursor: pointer;
-        }
-
-        #projects {
-            background-image: url("assets/space2.gif");
-            background-attachment: fixed;
-
-            width: 70%;
-            border: solid 1px white;
-            padding: 15px;
-            text-align: left;
-            vertical-align: top;
-        }
-		
-        .project_single {
-            border: solid 1px white;
-			vertical-align: top;
-			padding: 15px;
-			margin: 15px;
-			width: 370px;
-			height: 45%;
-			display: inline-block;
-			background-color: #0e1123;
-        }
-		.project_single_top {
-			height: 90%;
-		}
-		
-        .project_single img {
-            border: solid 1px white;
-            width: 100%;
-        }
-        .project_single img:hover {
-            filter: hue-rotate(150deg);
-        }
-		
-        .project_listen {
-            border: solid 1px white;
-			background-color: white;
-			color: black;
-            padding: 3px;
-            font-family: 'Comic Sans MS';
-			font-size: 15px;
-			width: 50%;
-			text-align: center;
-        }
-        .project_listen:hover {
-			background-image: url("assets/space.gif");
-			color: white;
-        }
-
-        td {
-            vertical-align: top;
-            padding: 5px;
-        }
-        .impact_text {
-            font-family: Impact; font-size: 50px;
-        }
-        button {
-            padding: 2px;
-            font-family: 'Comic Sans MS';
-        }
-
-        #snow {
-            position: absolute;
-        }
-    </style>
-</head>
-<body>
-    <!-- christmas snow -->
-    <div id="snow"></div>
-    <!-- logo -->
-    <div id="logo">
-        <center>
-        <img src="assets/logo.png" width="500">
-        </center>
-    </div>
-
-    <br><br>
-
-    <!-- links -->
-    <div id="links">
-        <img src="assets/links.gif" width="200"><br><br>
-        <center>
-            <div id="link_tree">
-                <ul>
-                    <li><a target='_blank' href='https://www.youtube.com/channel/UCXRWG8IkoIgSZi9wJDvXrqQ'>YouTube</a>
-                    <li><a target='_blank' href='https://gamejolt.com/@KamilFirma'>Game Jolt</a>
-                    <li><a target='_blank' href='https://twitter.com/KamilFirma'>Twitter</a>
-                    <li>Email: <small>kamilfirma5 (at) gmail (dot) com</small>
-                </ul>
+        <link href="style.css" rel="stylesheet">
+        <link href="style_hoppingout.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="top"></div>
+        <div id="menu">
+            <img src="assets/logo.png" class="logo">
+            <div class="menubutton" id="menubutton0" onclick="changePage(0)">WHO?</div>
+            <div class="menubutton" id="menubutton1" onclick="changePage(1)">LINKS</div>
+            <div class="menubutton" id="menubutton2" onclick="changePage(2)">PROJECTS</div>
+            <div class="menubutton" id="menubutton3" onclick="changePage(3)">HOPPING OUT</div>
+        </div>
+        <div class="page" id="page0">
+            <center>
+            <div class="textDisplayer">
+                <p>hello!</p>
+                <img src="assets/rabbitdud.png" class="bunny" onclick="playTheme()">
+                <p>i like games and music, particularly the making part of them</p>
+                <p>i made my first game in late 2016, but i feel like i've only gotten the hang of it way later.</p>
+                <p>
+                    in 2018 i wanted to make original music for my games,
+                    <br>
+                    so eventually i discovered
+                    <a target="_blank" href="https://www.beepbox.co/#9n31sbk6l00e00t1Uafg0fj07r1i0o432T0v0u00f10u2qw121d03w2h0E0T0v0u00f10u2qw121d03w2h0E0T0v0u00f10u2qw121d03w2h0E0T2v0u02f0qw02d03w1E0b4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4p24nFE-174p7ihR4tBBp7b4scnFBZjkXaPhVpaqfZdyXinSFHYoLIR-4M6rbRm2m8mrhO9ypJTKSr5NlJ6p6rLZA809Mqqf78SqfBr88WOBCFYm8QSnSCU_bkSLIx7OMBZCRZ4MPCRY0N65Xq_CcO-tPbLtpCTrshVKwjbsQvsYPbTdcFE-2ebrUzJGqpoLXeCzXC235pILiRdvzyIT1WpmCUf99uVILioiFdKWxyFHYi68SrbM6xdBWKGBYAhFGuhg9V6PNCS2s6FBWyv7pGpsF9u0">beepbox</a>
+                    which was what i used for years.
+                    <br>
+                    but since then i've moved to fl studio
+                </p>
+                <p>currently working on my puzzle game Hopping Out!! <span onclick="changePage(3)" class="clickableText">check it out!!</span></p>
+                <p style="margin-top:64px;">
+                    <a id="havefun" href="fun/fun.html" style="display: none;">[have fun]</a>
+                </p>
             </div>
-        </center>
-    </div>
-    <br>
-
-    <!-- about -->
-    <div id="about">
-        <img src="assets/about.gif" width="300">
-        <center>
-            <div id="about_tree">
-                i like games and music, particularly the making part of them
-                <br><br>
-                i started gamedev in late 2016, but i wouldn't say i've gotten the hang of it until around 2021.
-                <br><br>
-                by 2018 it felt like original music was a necessity for my games, so eventually i discovered <a target='_blank' href='https://www.beepbox.co/#9n31sbk6l00e00t1Uafg0fj07r1i0o432T0v0u00f10u2qw121d03w2h0E0T0v0u00f10u2qw121d03w2h0E0T0v0u00f10u2qw121d03w2h0E0T2v0u02f0qw02d03w1E0b4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4h4p24nFE-174p7ihR4tBBp7b4scnFBZjkXaPhVpaqfZdyXinSFHYoLIR-4M6rbRm2m8mrhO9ypJTKSr5NlJ6p6rLZA809Mqqf78SqfBr88WOBCFYm8QSnSCU_bkSLIx7OMBZCRZ4MPCRY0N65Xq_CcO-tPbLtpCTrshVKwjbsQvsYPbTdcFE-2ebrUzJGqpoLXeCzXC235pILiRdvzyIT1WpmCUf99uVILioiFdKWxyFHYi68SrbM6xdBWKGBYAhFGuhg9V6PNCS2s6FBWyv7pGpsF9u0'>beepbox</a>, which was what i used for years.. nowadays i just use fl studio though
-                <br><br>
-				currently working on Hopping Out!!
-                <br><br>
-				<iframe src="https://store.steampowered.com/widget/4297110/" frameborder="0" width="450" height="190"></iframe>
+            </center>
+        </div>
+        <div class="page" id="page1">
+            <center>
+            <div class="textDisplayer">
+                <p>i'm here:</p>
+                <p style="font-size: 0.8em;">
+                    <a target="_blank" href="https://www.youtube.com/@KamilFirma">YouTube</a>
+                    <br>
+                    <a target="_blank" href="https://twitter.com/KamilFirma">Twitter</a>
+                    <br>
+                    <a target="_blank" href="https://gamejolt.com/@KamilFirma">Game Jolt</a>
+                    <br>
+                    Email: <span style="font-size: 0.7em;">kamilfirma5 (at) gmail (dot) com</span>
+                    <br>
+                </p>
             </div>
-        </center>
-    </div>
-    <br>
-    <marquee scrollamount=6>
-        <img src="assets/rabbitdud.png" onclick='play_theme()' id="rabbitdud">
-    </marquee>
-    <br><br><br>
+            </center>
+        </div>
+        <div class="page" id="page2">
+            <p>here are the things i've gotten to work on:</p>
+            <center>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/hoppingout.png">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://store.steampowered.com/app/4297110/Hopping_Out">Steam</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">Hopping Out</span>
+                    <span class="projectDate">(2025-present)</span>
+                    <br>
+                    i'm currently making an original puzzle game!! releasing 2026!!
+                    <br>
+                    consider playing the <a target="_blank" href="https://store.steampowered.com/app/4297110/Hopping_Out">DEMO on Steam</a>...
+                </div>
+            </div>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/mypopgoes.png">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://store.steampowered.com/app/2429350/myPOPGOES">Steam</a>
+                        <a class="projectLink" target="_blank" href="https://play.google.com/store/apps/details?id=com.clickteam.mypopgoes">Android</a>
+                        <a class="projectLink" target="_blank" href="https://apps.apple.com/us/app/mypopgoes/id6499434486">iOS</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">myPOPGOES</span>
+                    <span class="projectDate">(2024)</span>
+                    <br>
+                    i got to make a bunch of music for the official FNaF spin-off myPOPGOES!!
+                    <ul>
+                        <li>chiptune music for Endless Mode and all Games</li>
+                        <li>"My Bonnie" secret music box</li>
+                        <li>remixes of all gameplay music for Special mode</li>
+                        <li>filtering Toy sound effects</li>
+                    </ul>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=ZUVTM061ixQ">i also made a video with commentary for each track!</a>
+                </div>
+            </div>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/ruin2.gif">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://gamejolt.com/games/Ruin2/846902">Game Jolt</a>
+                        <a class="projectLink" target="_blank" href="https://www.youtube.com/playlist?list=PL44aYeZr3eB1dkRyqFzkm-1Lc5ICoG1Pd">Soundtrack</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">Ruin 2: Mimic Adventures</span>
+                    <span class="projectDate">(FNaF fangame) (2023-2024)</span>
+                    <br>
+                    <div style="margin-bottom:50px;">i made a LOT of music</div>
+                    and the sprites for one secret guy
+                    <br>
+                    have you seen him?
+                </div>
+            </div>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/ultracn.gif">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://gamejolt.com/games/ultracustomnight/497721">Game Jolt</a>
+                        <a class="projectLink" target="_blank" href="https://www.youtube.com/playlist?list=PL44aYeZr3eB14JkN89hAB_5RWwv2pvLtB">Soundtrack</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">Ultra Custom Night</span>
+                    <span class="projectDate">(FNaF fangame) (2020-2024)</span>
+                    <br>
+                    <div style="margin-bottom:30px;">i programmed that game with just too many characters</div>
+                    also made the occasional music (mostly in Campaign Mode),
+                    <br>
+                    and even more occasional 3D model
+                </div>
+            </div>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/forsakenar.png">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://gamejolt.com/games/forsakenar/841235">Game Jolt</a>
+                        <a class="projectLink" target="_blank" href="https://www.youtube.com/playlist?list=PL44aYeZr3eB10CSS2OLWqmOVBoitGMp_G">Soundtrack</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">Forsaken AR: Factory Reset</span>
+                    <span class="projectDate">(FNaF fangame) (2022-present)</span>
+                    <br>
+                    i contributed music for the FNaF AR mod
+                </div>
+            </div>
+            <div class="project">
+                <div class="projectLeft">
+                    <img src="assets/projects/walrus.gif">
+                    <div class="projectLinks">
+                        <a class="projectLink" target="_blank" href="https://www.youtube.com/playlist?list=PL44aYeZr3eB1tTLakDCuPr6U4-6LT6UO4">Soundtrack</a>
+                    </div>
+                </div>
+                <div class="projectText">
+                    <span class="projectTitle">Walrus-esque Games</span>
+                    <span class="projectDate">(2022-2023)</span>
+                    <br>
+                    i made music for the many walrus games:
+                    <ul>
+                        <li><a target="_blank" href="https://gamejolt.com/games/walrus/771188">Walrus Object Identification Training</a></li>
+                        <li><a target="_blank" href="https://gamejolt.com/games/WalrusContactTime/780859">Walrus Contact Time</a></li>
+                        <li><a target="_blank" href="https://gamejolt.com/games/CountTheGuys/829728">Count the Guys</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>..and other things i'm excited to be able to talk about eventually</p>
+            </center>
+        </div>
+        <div class="page frog" id="page3">
+            <div id="froglogo">
+                <img src="assets/hoppingout/logo.png">
+                <br>
+                <a style="font-family:'DD'; color:#a8e1f9">RELEASING 2026</a>
+            </div>
+            <div class="text">
+                <p>
+                    Hopping Out is a tile-based puzzle game where you hop 2 tiles at a time.
+                    <br>
+                    Play as Frog and use your tongue to move boxes, press buttons to create lily pads, all to catch many flies!
+                </p>
+                <a class="frogbutton frogbuttonbig" target='_blank' href='https://store.steampowered.com/app/4297110/Hopping_Out'>PLAY DEMO ON STEAM</a>
+            </div>
+            <div class="darksection">
+                <div class="text">
+                    <img class="gifs" src="assets/hoppingout/desc-wallhit.gif">
+                    <img class="gifs" src="assets/hoppingout/desc-beachcrab.gif">
+                    <p>Solve over 180 puzzle levels across 7 worlds to help Frog move out of the busy swamp and live a calm life in the city!</p>
+                    <p style="color:#86b1ed; font-size:36px; margin-bottom:-20px;">Features:</p>
+                    <p>
+                        ▪ Hop two tiles, or bump into solid walls to stop yourself mid-jump.
+                        <br>
+                        ▪ Play around with many elements such as deadly bees, bouncy mushrooms, or fly-luring skunks.
+                        <br>
+                        ▪ Test your puzzle-solving in difficult bonus levels.
+                        <br>
+                        ▪ Explore a level select map with integrated puzzles and split paths.
+                        <br>
+                        ▪ Collect and mix-and-match cosmetics in the wardrobe.
+                    </p>
+                    <a class="frogbutton" href='hoppingout_updates'>VIEW UPDATES</a>
+                </div>
+            </div>
+            <img src="assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="cursor:pointer;">
+            <div id="frogcredits">
+                background / key art by Amitz
+                <br>
+                fonts "CyborgSister" and "DigitalDisco" from fontenddev.com
+            </div>
+        </div>
 
-    <br>
-    <!-- projects -->
-    <center>
-    <div id="projects">
-        <center>
-            <img src="assets/projects.gif" width="300">
-        </center>
-        <hr>
-		<div class="project_single">
-			<div class="project_single_top">
-				<a target='_blank' href='https://store.steampowered.com/app/4297110/Hopping_Out/'><img src="assets/projects/hoppingout.png"></a>
-				<big><a target='_blank' href='https://store.steampowered.com/app/4297110/Hopping_Out/'>Hopping Out</a></big>
-				<small><i>(2025-present)</i></small>
-				<br><br>
-				A whole lot of things
-			</div>
-			<a href="./hoppingout/"><div class="project_listen">Sub-page</div></a>
-		</div>
-		<div class="project_single">
-			<div class="project_single_top">
-				<a target='_blank' href='https://store.steampowered.com/app/2429350/myPOPGOES/'><img src="assets/projects/mypopgoes.png"></a>
-				<big><a target='_blank' href='https://store.steampowered.com/app/2429350/myPOPGOES/'>myPOPGOES</a></big>
-				<small><i>(2024)</i></small>
-				<br><br>
-				Endless mode and Minigame music, "My Bonnie" music box, Special mode remixes, filtering for all Toy audio
-				<div style="color:black;font-size:5px;">i also added the fades in and out to the official soundtrack videos</div>
-			</div>
-			<a href="https://youtu.be/ZUVTM061ixQ"><div class="project_listen">♫ Listen</div></a>
-		</div>
-		<div class="project_single">
-			<div class="project_single_top">
-				<a target='_blank' href='https://gamejolt.com/games/Ruin2/846902'><img src="assets/projects/ruin2.gif"></a>
-				<big><a target='_blank' href='https://gamejolt.com/games/Ruin2/846902'>Ruin 2: Mimic Adventures</a></big>
-				<small><i>(2023-2024)</i></small>
-				<br><small>(FNaF fangame)</small>
-				<br><br>
-				Music, some testing, one sprite
-			</div>
-			<a href="https://www.youtube.com/playlist?list=PL44aYeZr3eB1dkRyqFzkm-1Lc5ICoG1Pd"><div class="project_listen">♫ Listen</div></a>
-		</div>
-		<div class="project_single">
-			<div class="project_single_top">
-				<a target='_blank' href='https://gamejolt.com/games/ultracustomnight/497721'><img src="assets/projects/ultracn.gif"></a>
-				<big><a target='_blank' href='https://gamejolt.com/games/ultracustomnight/497721'>Ultra Custom Night</a></big>
-				<small><i>(2020-2024)</i></small>
-				<br><small>(FNaF fangame)</small>
-				<br><br>
-				Programming, music, some art / models / 3D renders
-			</div>
-			<a href="https://www.youtube.com/playlist?list=PL44aYeZr3eB14JkN89hAB_5RWwv2pvLtB"><div class="project_listen">♫ Listen</div></a>
-		</div>
-		<div class="project_single">
-			<div class="project_single_top">
-				<a target='_blank' href='https://gamejolt.com/games/forsakenar/841235'><img src="assets/projects/forsakenar.png"></a>
-				<big><a target='_blank' href='https://gamejolt.com/games/forsakenar/841235'>Forsaken AR: Factory Reset</a></big>
-				<small><i>(2022-present)</i></small>
-				<br><small>(FNaF fangame)</small>
-				<br><br>
-				Music
-			</div>
-			<a href="https://www.youtube.com/playlist?list=PL44aYeZr3eB10CSS2OLWqmOVBoitGMp_G"><div class="project_listen">♫ Listen</div></a>
-		</div>
-		<div class="project_single">
-			<div class="project_single_top">
-				<img src="assets/projects/walrus.gif">
-				<big>Walrus-esque Games</big>
-				<small><i>(2022-2023)</i></small>
-				<div style="font-size:13px;">
-					• <a target='_blank' href='https://gamejolt.com/games/walrus/771188'>Walrus Object Identification Training</a><br>
-					• <a target='_blank' href='https://gamejolt.com/games/WalrusContactTime/780859'>Walrus Contact Time</a><br>
-					• <a target='_blank' href='https://gamejolt.com/games/CountTheGuys/829728'>Count the Guys</a>
-				</div>
-				<br>
-				Music
-			</div>
-			<a href="https://www.youtube.com/playlist?list=PL44aYeZr3eB1tTLakDCuPr6U4-6LT6UO4"><div class="project_listen">♫ Listen</div></a>
-		</div>
-    </div>
-    </center>
-	
-    <br><br><br>
+        <script>
+            time = 0;
+            page = 0;
+            page_count = 4;
+            titles = [
+                "my website!!",
+                "my website!! - Links",
+                "my website!! - Projects",
+                "Hopping Out",
+            ];
+            anchors = [
+                "#who",
+                "#links",
+                "#projects",
+                "#hoppingout",
+            ];
 
-    <!-- funny -->
-    <center>
-    <div id='piano'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(0)'>
-        <img src='assets/piano/keyblack.png' onclick='pianokey(1)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(2)'>
-        <img src='assets/piano/keyblack.png' onclick='pianokey(3)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(4)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(5)'>
-        <img src='assets/piano/keyblack.png' onclick='pianokey(6)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(7)'>
-        <img src='assets/piano/keyblack.png' onclick='pianokey(8)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(9)'>
-        <img src='assets/piano/keyblack.png' onclick='pianokey(10)'>
-        <img src='assets/piano/keywhite.png' onclick='pianokey(11)'>
-        <br>
-        <a href='fun/fun.html'>have fun</a>
-    </div>
-    <div id="snowfooter"></div>
-    </center>
-    <br><br><br>
-
-    <script>
-        function clamp(value, min_value, max_value){
-            return Math.min(Math.max(value, min_value), max_value);
-        }
-        function rng(min, max){
-            return Math.round(Math.random() * (max - min) + min);
-        }
-
-        //every frame
-        time = 0;
-        function frame(){
-            //header & logo movement
-            var scrollpos = document.body.scrollTop;
-            document.getElementById("logo").style.top = clamp(scrollpos, 0, 150);
-            document.getElementById("logo").style.left = Math.sin(time*0.01)*7;
-
-            time ++;
-            var frame_timeout = setTimeout(frame, 1);
-        }
-        frame();
-
-        //rabbitdud clicking
-        played_theme = 0;
-        function play_theme(){
-            if(played_theme==0){
-                var audio = "";
-                if(christmas==0){
-                    audio = new Audio( 'assets/theme.mp3' );
+            function playSound(sound){
+                new Audio(sound).play();
+            }
+            function changePage(pageid){
+                page = pageid;
+                for(i=0; i<page_count; i++){
+                    var myid = i.toString();
+                    if( page==i ){
+                        document.getElementById("page"+myid).style.display = 'block';
+                        document.getElementById("menubutton"+myid).classList.add('highlight');
+                    }else{
+                        document.getElementById("page"+i.toString()).style.display = 'none';
+                        document.getElementById("menubutton"+myid).classList.remove('highlight');
+                    }
+                    window.location.hash = anchors[pageid];
+                }
+                document.title = titles[pageid];
+                changeFavicon();
+                document.getElementById("top").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            }
+            function getAnchoredPage(){
+                if( window.location.hash ){
+                    for(i=0; i<page_count; i++){
+                        if( window.location.hash==anchors[i] ){
+                            return i;
+                        }
+                    }
+                }
+                return 0;
+            }
+            function changeFavicon(){
+                if( page==3 ){
+                    document.getElementById('favicon').setAttribute('href','assets/hoppingout/favicon.png');
                 }else{
-                    audio = new Audio( 'assets/christmas/theme_christmas.ogg' );
-                }
-                audio.play();
-                played_theme = 1;
-                document.getElementById("piano").style.display = "block";
-            }
-        }
-
-        //highlight stars movement
-		/*
-        highlightstar_time = 0;
-        function highlightstar_move(){
-            document.getElementById('highlight_sparkles1').style.position = 'relative';
-            document.getElementById('highlight_sparkles1').style.top = -50 + clamp((Math.cos(highlightstar_time*0.07)*50), -100, 40);
-            document.getElementById('highlight_sparkles2').style.position = 'relative';
-            document.getElementById('highlight_sparkles2').style.top = -50 + clamp((Math.sin(highlightstar_time*0.07)*50), -100, 40);
-            highlightstar_time++;
-            setTimeout(highlightstar_move, 5);
-        }
-        highlightstar_move();
-		*/
-
-        //carousel
-		/*
-        carousel_frog = ['ss3.png','ss4.png','ss5.png','ss6.png','ss7.png'];
-        carousel_max = carousel_frog.length;
-        carousel_progress = rng(0, carousel_max);
-        function carousel_move(auto){
-            if(auto == 0){
-                var audio = new Audio( 'assets/click.mp3' );
-                audio.play();
-            }
-            carousel_progress ++;
-            if(carousel_progress >= carousel_max){
-                carousel_progress = 0;
-            }
-            document.getElementById("carousel_frog").innerHTML = "<img width=500 class='carousel_image' onclick='carousel_move(0)' src='assets/highlight/" + carousel_frog[carousel_progress] + "'>";
-        }
-        carousel_move(1);
-		*/
-
-        //piano ------------------------------------------------------------
-        document.getElementById("piano").style.display = "none";
-
-        pianokeys = [
-            'assets/piano/C.mp3',
-            'assets/piano/Cs.mp3',
-            'assets/piano/D.mp3',
-            'assets/piano/Ds.mp3',
-            'assets/piano/E.mp3',
-            'assets/piano/F.mp3',
-            'assets/piano/Fs.mp3',
-            'assets/piano/G.mp3',
-            'assets/piano/Gs.mp3',
-            'assets/piano/A.mp3',
-            'assets/piano/As.mp3',
-            'assets/piano/B.mp3'
-        ]
-
-        wrongnote = 'piano/wrong.mp3';
-        wrongnote_random = 0;
-
-        function pianokey(key){
-            wrongnote_random = Math.floor(Math.random() * 200);
-            if(wrongnote_random==1){
-                var toplay = wrongnote;
-            }else{
-                var toplay = pianokeys[key]
-            }
-            
-            var audio = new Audio( toplay );
-            audio.play();
-        }
-
-        //christmas -------------------------------------------------------------------------------------------------------------------------
-        christmas = 0;
-        snowflake_amount = 70;
-        snowflake_time = 0;
-        page_height = document.body.scrollHeight;
-		//deciding if its christmas based on date
-		var curdate = new Date();
-		if( curdate.getMonth()+1==12 && curdate.getDate()>=12 ){
-			christmas = 1;
-		}
-
-        snowflake_pos = [];
-        snowflake_spd = [];
-        scrollpos = document.body.scrollTop;
-
-        if(christmas==1){
-            load_christmas();
-        }
-
-        function load_christmas(){
-            console.log('one christmas coming right up!');
-            christmas = 1;
-            
-            //document changes
-            document.body.style.borderImage = "url('assets/christmas/border3.gif') 30 / 19px round";
-            document.body.style.backgroundImage = "url('assets/christmas/stars.gif')";
-            document.getElementById('logo').style.filter = "hue-rotate(200deg)";
-            document.getElementById('link_tree').style.border = "2px dashed green";
-            document.getElementById('about_tree').style.border = "2px dashed green";
-            //document.getElementById('highlight').style.border = "2px dashed green";
-            document.getElementById('projects').style.border = "2px dashed green";
-            //document.getElementById('highlight_sparkles1').src = "assets/christmas/christmastree.gif";
-            //document.getElementById('highlight_sparkles2').src = "assets/christmas/christmastree.gif";
-            document.getElementById('rabbitdud').src = "assets/christmas/christmas_rabbitdud.png";
-            document.getElementById('snowfooter').innerHTML = "<img src='assets/christmas/snow_footer.gif' width=100%>";
-            
-            //spawn snow
-            var spawn_snow = "";
-            for(i=0; i<snowflake_amount; i++){
-                spawn_snow += "<img src='assets/christmas/snowflake.gif' width="+rng(10,20)+" style='opacity:60%;position:absolute;' id='snowflake"+i+"'>";
-                snowflake_pos[i] = [rng(100,1820), rng(100,980)];
-                snowflake_spd[i] = rng(20, 60)*0.01;
-            }
-            document.getElementById('snow').innerHTML = spawn_snow;
-            snow_sim();
-        }
-
-        function snow_sim(){
-            scrollpos = document.body.scrollTop;
-            document.getElementById('snow').style.top = clamp(scrollpos, 0, page_height-900);
-
-            for(i=0; i<snowflake_amount; i++){
-                document.getElementById('snowflake'+i).style.left = snowflake_pos[i][0] + Math.sin(snowflake_time*0.01+snowflake_spd[i])*10;
-                document.getElementById('snowflake'+i).style.top = snowflake_pos[i][1];
-                snowflake_pos[i][1] += snowflake_spd[i];
-                if(snowflake_pos[i][1]>=1080){
-                    snowflake_pos[i][0] = rng(100,1820);
-                    snowflake_pos[i][1] = -50;
+                    document.getElementById('favicon').setAttribute('href','assets/favicon.png');
                 }
             }
-            snowflake_time++;
-            setTimeout(snow_sim, 5);
-        }
-    </script>
-</body>
+            function frame(){
+                time ++;
+                var frame_timeout = setTimeout(frame, 33);
+
+                //hoppingout logo
+                document.getElementById("froglogo").style.top = Math.sin(time*0.05)*12 + 10;
+
+                //frog croaking
+                var frog_img = "frog.png";
+                if( croak_time>0 ){
+                    croak_time --;
+                    frog_img = "frog_croak.png";
+                }
+                if( document.getElementById("croakfrog") ){
+                    document.getElementById("croakfrog").src = "assets/hoppingout/" + frog_img;
+                }
+            }
+
+            playedTheme = false;
+            themeAudio = new Audio("assets/theme.mp3");
+            function playTheme(){
+                if( playedTheme==false ){
+                    themeAudio.play();
+                    playedTheme = true;
+                }else if( themeAudio.paused ){
+                    themeAudio.play();
+                }else{
+                    themeAudio.pause();
+                }
+                document.getElementById("havefun").style.display = "block";
+            }
+            
+            croak_time = 0;
+            function croak_frog(){
+                croak_time = 25;
+                var audio = new Audio( 'assets/hoppingout/sfx_frogcroak.ogg' );
+                audio.play();
+            }
+
+
+            changePage( getAnchoredPage() );
+            frame();
+        </script>
+    </body>
 </html>

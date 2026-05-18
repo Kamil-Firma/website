@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title>Hopping Out - Updates</title>
+    <link rel="icon" href="assets/hoppingout/favicon.png">
+    <link href="style.css" rel="stylesheet">
+    <link href="style_hoppingout.css" rel="stylesheet">
+</head>
+<body class="frog updates">
+    <br>
+    <div class="frogtext">
+        <a class="frogbutton" href='.#hoppingout' style="color:white;">BACK TO MAIN PAGE</a>
+    </div>
+    <div id="froglogo">
+        <img id="logo_img" src="assets/hoppingout/logo.png" width=600>
+        <br>
+        <a style="font-family:'DD'; color:#a8e1f9">Updates</a>
+    </div>
+    <hr>
+    <div id="updatelist"></div>
+    <hr>
+    <div id="article">
+        <div id="article_wrap">
+            <div id="update_banner"></div>
+            <div id="update_title"></div>
+            <div id="update_date"></div>
+            <div id="update_text"></div>
+        </div>
+    </div>
+    <br>
+    <div class="frogtext">
+        <a class="frogbutton" onclick='back_to_top()'>BACK TO TOP</a>
+    </div>
+    <br>
+
+    <script src="assets/hoppingout/updates/update_data.js"></script>
+    <script>
+        //every frame
+        time = 0;
+        croak_time = 0;
+        function frame(){
+            time ++;
+            var frame_timeout = setTimeout(frame, 33);
+
+            //logo scaling
+            document.getElementById("froglogo").style.top = Math.sin(time*0.05)*6;
+
+            //frog croaking
+            var frog_image_element = document.getElementById("croakfrog");
+            if( frog_image_element != null ){
+                var frog_img = "frog.png";
+                if( croak_time>0 ){
+                    croak_time --;
+                    frog_img = "frog_croak.png";
+                }
+                frog_image_element.src = "assets/hoppingout/" + frog_img;
+            }
+        }
+        frame();
+
+        //loading update list
+        var update_list = "<ul>";
+        for(i=update_count; i>=0; i--){
+            var mydata = get_update_data(i);
+            update_list += "<li>";
+            update_list += "<div class='update_load_button' onclick='load_update("+i+")'>";
+            update_list += "<a style='font-size:24px; color:yellow;'>";
+            update_list += "(" + mydata.date + ") ";
+            update_list += "</a>";
+            update_list += mydata.title;
+            update_list += "</div>";
+            update_list += "</li>";
+        }
+        update_list += "</ul>";
+        document.getElementById("updatelist").innerHTML = update_list;
+
+        //loading update text
+        function load_update(uid, forced=false){
+            var mydata = get_update_data(uid);
+            document.getElementById("update_title").innerHTML = mydata.title;
+            document.getElementById("update_date").innerHTML = mydata.date;
+            document.getElementById("update_text").innerHTML = mydata.text;
+
+            //banner
+            var bannerhtml = "";
+            if( mydata.banner != "" ){
+                bannerhtml = "<img src='assets/hoppingout/updates/" + mydata.banner + "'>";
+            }
+            document.getElementById("update_banner").innerHTML = bannerhtml;
+
+            //scrolling down
+            if( forced==false ){
+                document.getElementById("update_banner").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            }
+
+            //replace frogs with croakable frogs
+            var frogelem = document.getElementById("croakfrogspot");
+            if( frogelem!=null ){
+                frogelem.innerHTML = '<img src="assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="border:none;cursor:pointer;">';
+            }
+        }
+        load_update(update_count, true);
+
+        //back to top
+        function back_to_top(){
+            document.getElementById("froglogo").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        }
+
+        //croak frog
+        function croak_frog(){
+            croak_time = 25;
+            var audio = new Audio( 'assets/hoppingout/sfx_frogcroak.ogg' );
+            audio.play();
+        }
+    </script>
+</body>
+</html>

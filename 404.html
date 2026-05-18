@@ -1,35 +1,30 @@
 <html>
 <head>
-    <title>oops..</title>
+    <title>oops</title>
+    <link id="favicon" rel="icon" href="assets/favicon.png">
+
     <style>
         body {
 			background-color: black;
             color: white;
-            font-family: 'Comic Sans MS';
         }
-        a:link {
-            color: ff9afc
-        }
-        a:visited {
-            color: ff9afc
-        }
-
         #error {
             text-align: center;
             padding-top: 400;
             padding-bottom: 400;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id='error' onclick="playmusic()">sorry..</div>
+    <div id='error' onclick="playmusic()">oops</div>
 </body>
 
 <script>
     playedmusic = 0;
     function playmusic(){
         if(playedmusic==0){
-            var audio = new Audio( '/website/assets/sorry.ogg' );
+            var audio = new Audio( 'assets/sorry.ogg' );
             audio.play();
             playedmusic = 1;
         }

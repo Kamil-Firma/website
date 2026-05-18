@@ -1,0 +1,168 @@
+body {
+    background: black;
+    color: white;
+    font-family: 'Comic Relief';
+    font-size: 1.5em;
+    overflow-y: scroll;
+    background-image: url("assets/space.gif");
+}
+img {
+    image-rendering: pixelated;
+}
+a:link {
+    color: #ff9afc;
+}
+a:visited {
+    color: #ff9afc;
+}
+.clickableText {
+    color: #ff9afc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+p, .projectText {
+    filter: drop-shadow(0px 0px 3px #000000) drop-shadow(0px 0px 3px #000000);
+}
+
+#menu {
+    width: 100%;
+    min-height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    border-bottom: 2px white dashed;
+    background-image: url("assets/space3.gif");
+    background-attachment: fixed;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+@keyframes floatLogo {
+    0%   {top: 0px;}
+    100%   {top: 8px;}
+}
+.logo {
+    height: 100%;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    position: relative;
+    animation-name: "floatLogo";
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.menubutton {
+    border: 2px white solid;
+    width: 180px;
+    height: 30px;
+    padding: 8px;
+    margin: 8px;
+    text-align: center;
+    background: #332573;
+    background: linear-gradient(0deg,rgba(51, 37, 115, 1) 0%, rgba(118, 58, 140, 1) 100%);
+}
+.menubutton:hover {
+    cursor: pointer;
+    background: #b6aaf2;
+    background: linear-gradient(0deg, rgba(182, 170, 242, 1) 0%, rgba(177, 41, 227, 1) 100%);
+    color: black;
+}
+.highlight {
+    background: #f2f2aa;
+    background: linear-gradient(0deg, rgba(242, 242, 170, 1) 0%, rgba(199, 41, 227, 1) 100%);
+    color: black;
+}
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+.textDisplayer {
+    background-image: url("assets/space2.gif");
+    background-attachment: fixed;
+    border: 1px white solid;
+    max-width: 800px;
+}
+@keyframes floatBunny {
+    0%   {left: -10px;}
+    100%   {left: 10px;}
+}
+.bunny {
+    position: relative;
+    animation-name: "floatBunny";
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    cursor: pointer;
+}
+
+.project {
+    text-align: left;
+    font-size: 0.7em;
+    max-width: 80%;
+    border: 2px white solid;
+    padding: 10px;
+    background: #190f2e;
+    background: linear-gradient(0deg, rgba(25, 15, 46, 1) 0%, rgb(58, 30, 63) 100%);
+    
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.projectLeft {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.projectLeft img {
+    border: 2px white solid;
+    max-width: 100%;
+    width: 400px;
+}
+.projectLinks {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 45px;
+}
+.projectLink {
+    border: 2px white solid;
+    padding: 8px;
+    margin: 8px;
+    text-align: center;
+    font-size: 0.8em;
+    height: 15px;
+    background: #332573;
+    background: linear-gradient(0deg,rgba(51, 37, 115, 1) 0%, rgba(118, 58, 140, 1) 100%);
+}
+.projectLink:link {
+    color: white;
+    text-decoration: none;
+}
+.projectLink:visited {
+    color: white;
+}
+.projectLink:hover {
+    cursor: pointer;
+    background: #b6aaf2;
+    background: linear-gradient(0deg, rgba(182, 170, 242, 1) 0%, rgba(177, 41, 227, 1) 100%);
+    color: black;
+}
+.projectText {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.projectText ul {
+    margin-left: -30px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+.projectTitle {
+    font-size: 1.4em;
+}
+.projectDate {
+    font-size: 0.8em;
+    color: #e4e4e4;
+    font-style: italic;
+}
