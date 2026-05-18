@@ -247,7 +247,7 @@
                         document.getElementById("page"+i.toString()).style.display = 'none';
                         document.getElementById("menubutton"+myid).classList.remove('highlight');
                     }
-                    window.location.hash = anchors[pageid];
+                    changePageAnchor();
                 }
                 document.title = titles[pageid];
                 changeFavicon();
@@ -262,6 +262,14 @@
                     }
                 }
                 return 0;
+            }
+            function changePageAnchor(){
+                if( page!=0 ){
+                    location.replace(anchors[page]);
+                }else{
+                    history.pushState("", document.title, window.location.pathname + window.location.search);
+                }
+                console.log(window.location);
             }
             function changeFavicon(){
                 if( page==3 ){
@@ -308,7 +316,6 @@
                 var audio = new Audio( 'assets/hoppingout/sfx_frogcroak.ogg' );
                 audio.play();
             }
-
 
             changePage( getAnchoredPage() );
             frame();
