@@ -85,13 +85,11 @@
     border: white 6px solid;
     max-width: 40%;
     margin: 8px;
-    cursor: pointer;
 }
 #frogcredits {
     padding: 10px;
-    background-color: #09212c;
     font-size: 26px;
-    color: #7595a4;
+    color: #91abb8;
     text-align: left;
     padding-left: 10%;
     margin-top: 16px;

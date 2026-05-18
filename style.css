@@ -15,6 +15,9 @@ a:link {
 a:visited {
     color: #ff9afc;
 }
+a:hover {
+    color: #ffc1fd;
+}
 .clickableText {
     color: #ff9afc;
     cursor: pointer;
@@ -97,19 +100,28 @@ p, .projectText {
     cursor: pointer;
 }
 
+@property --projectGradient1 {
+  syntax: '<color>';
+  initial-value: #190f2e;
+  inherits: false;
+}
 .project {
     text-align: left;
     font-size: 0.7em;
     max-width: 80%;
     border: 2px white solid;
     padding: 10px;
-    background: #190f2e;
-    background: linear-gradient(0deg, rgba(25, 15, 46, 1) 0%, rgb(58, 30, 63) 100%);
+    background: linear-gradient(0deg, var(--projectGradient1) 0%, #3a1e3f 100%);
+    transition: --projectGradient1 0.1s;
     
     margin-bottom: 8px;
     display: flex;
     flex-wrap: wrap;
 }
+.project:hover {
+    --projectGradient1: #2c1561;
+}
+
 .projectLeft {
     display: flex;
     justify-content: center;
@@ -119,6 +131,7 @@ p, .projectText {
     border: 2px white solid;
     max-width: 100%;
     width: 400px;
+    image-rendering: auto;
 }
 .projectLinks {
     display: flex;
