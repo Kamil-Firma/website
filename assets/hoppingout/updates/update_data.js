@@ -1,4 +1,4 @@
-var update_count = 5;
+var update_count = 6;
 function get_update_data(uid){
     switch(uid){
         case 0:
@@ -42,6 +42,13 @@ function get_update_data(uid){
                 banner : "apr2026_banner.png",
                 date : "April 23, 2026",
                 text : "Hello!!<br>Lots has happened since the last update!<hr>The last world before the game's ending, the Mansion is more or less finished!<br><img src='assets/hoppingout/updates/apr2026_mansion_painting2.png'><br>I'm really quite happy with how it turned out. There's a cool guy there.<hr><img src='assets/hoppingout/updates/apr2026_post.png'><br>I've been working on whatever happens after the game's ending.<hr>The past month has also been a month of adding cool side stuff:<ul><li>Every bonus level in the game has a costume reward now! That's a bunch!!</li><li>Every slideshow cutscene has proper art now! That's also a bunch!!</li><li>Finally added Steam achievements.</li><li>Every NPC has a unique voice blip now, which i think adds cool personality.</li><li>There's interactive horse gameplay.</li><li>I added two guys i can't show yet but they both have a lot of dialogue.</li></ul><img src='assets/hoppingout/updates/apr2026_mansion_statue_hiding.png'><br>Outside of that, I've been focusing on full-game testing. These are becoming quite a lot longer as the game grows... Crazy to think about.<hr><div id='croakfrogspot'></div>That's all!! Thank you for reading again."
+            }
+        case 6:
+            return {
+                title : 'June Development Update',
+                banner : "jun2026_banner.png",
+                date : "June 14, 2026",
+                text : "Hello!!<br>Have you played the demo yet? I released a patch a while ago (May 22) that added some little things:<ul><li>Feedback button now appears on the title screen, for when you want to send me an essay. (or do it outside of the game <a href='https://forms.gle/Hb5cWb7PoEVzmSrv9' target='_blank'>here</a>!)</li><li>Confetti appears when you beat a level. Yay!</li><li>The butterfly on the level select map has cool new UI.</li><li>It is possible to outright skip levels now, if you need to. There's also a new option in the settings to turn off the possibility of skipping levels, too.</li><li>Borderless fullscreen doesn't reset back to regular borderfull fullscreen for a frame every time you reload the settings menu/title screen anymore.</li></ul>In other news.. Hopping Out will be part of Steam Next Fest: June 2026! Have you told everyone you know yet?<hr>The last while has been about adding new things and improving old things. (like all the other whiles)<br><b>The game has reached 200 levels! That's a bunch!</b><br><img src='assets/hoppingout/updates/jun2026_fire.png'><br>I would like to add just a few more levels before release. Very exciting i think!!<br>Since the last devlog, i made two very unique levels which i really like. I will keep these as a surprise.<br><img src='assets/hoppingout/updates/jun2026_cow.png'><br>I also worked on the soundtrack so it's closer to being ready for release. At the current moment, it has 57 tracks including all the level select theme variations, but that count will likely increase just a bit more before release.<hr><div id='croakfrogspot'></div>That's everything for now! By the next devlog, i hope to be able to reveal the game's release date. (it's getting very close!)"
             }
         default:
             return "error";
