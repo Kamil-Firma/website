@@ -45,14 +45,19 @@
             document.getElementById("froglogo").style.top = Math.sin(time*0.05)*6;
 
             //frog croaking
-            var frog_image_element = document.getElementById("croakfrog");
-            if( frog_image_element != null ){
-                var frog_img = "frog.png";
-                if( croak_time>0 ){
+            var frog_image_idle = document.getElementById("croakfrog0");
+            var frog_image_croak = document.getElementById("croakfrog1");
+            if( frog_image_idle!=null && frog_image_croak!=null ){
+                if( croak_time==0 ){
+					frog_image_idle.style.visibility = "visible";
+					frog_image_croak.style.visibility = "hidden";
+					frog_image_idle.style.position = "static";
+				}else{
                     croak_time --;
-                    frog_img = "frog_croak.png";
-                }
-                frog_image_element.src = "assets/hoppingout/" + frog_img;
+					frog_image_idle.style.visibility = "hidden";
+					frog_image_croak.style.visibility = "visible";
+					frog_image_idle.style.position = "absolute";
+				}
             }
         }
         frame();
@@ -95,7 +100,7 @@
             //replace frogs with croakable frogs
             var frogelem = document.getElementById("croakfrogspot");
             if( frogelem!=null ){
-                frogelem.innerHTML = '<img src="assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="border:none;cursor:pointer;">';
+                frogelem.innerHTML = '<img src="assets/hoppingout/frog.png" id="croakfrog0" onclick="croak_frog()" style="border:none;cursor:pointer;"><img src="assets/hoppingout/frog_croak.png" id="croakfrog1" style="border:none;cursor:pointer;">';
             }
         }
         load_update(update_count, true);

@@ -209,7 +209,10 @@
                     <a class="frogbutton" href='https://drive.google.com/drive/folders/1fsPmLaIXpEZw-9sw5AP-lc4y-egnQGEU?usp=sharing'>PRESS KIT</a>
                 </div>
             </div>
-            <img src="assets/hoppingout/frog.png" id="croakfrog" onclick="croak_frog()" style="cursor:pointer;">
+			<div style='height:64px'>
+				<img src="assets/hoppingout/frog.png" id="croakfrog0" onclick="croak_frog()" style="cursor:pointer;">
+				<img src="assets/hoppingout/frog_croak.png" id="croakfrog1" style="cursor:pointer;">
+			</div>
             <div id="frogcredits">
                 -website credits-
                 <br>
@@ -289,14 +292,22 @@
                 document.getElementById("froglogo").style.top = Math.sin(time*0.05)*12 + 10;
 
                 //frog croaking
-                var frog_img = "frog.png";
-                if( croak_time>0 ){
-                    croak_time --;
-                    frog_img = "frog_croak.png";
-                }
-                if( document.getElementById("croakfrog") ){
-                    document.getElementById("croakfrog").src = "assets/hoppingout/" + frog_img;
-                }
+				var frog_image_idle = document.getElementById("croakfrog0");
+				var frog_image_croak = document.getElementById("croakfrog1");
+				if( frog_image_idle!=null && frog_image_croak!=null ){
+					if( croak_time==0 ){
+						frog_image_idle.style.visibility = "visible";
+						frog_image_croak.style.visibility = "hidden";
+						frog_image_idle.style.position = "static";
+						frog_image_croak.style.position = "absolute";
+					}else{
+						croak_time --;
+						frog_image_idle.style.visibility = "hidden";
+						frog_image_croak.style.visibility = "visible";
+						frog_image_idle.style.position = "absolute";
+						frog_image_croak.style.position = "static";
+					}
+				}
             }
 
             playedTheme = false;
