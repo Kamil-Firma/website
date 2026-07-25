@@ -1,4 +1,4 @@
-var update_count = 6;
+var update_count = 7;
 function get_update_data(uid){
     switch(uid){
         case 0:
@@ -50,6 +50,13 @@ function get_update_data(uid){
                 date : "June 14, 2026",
                 text : "Hello!!<br>Have you played the demo yet? I released a patch a while ago (May 22) that added some little things:<ul><li>Feedback button now appears on the title screen, for when you want to send me an essay. (or do it outside of the game <a href='https://forms.gle/Hb5cWb7PoEVzmSrv9' target='_blank'>here</a>!)</li><li>Confetti appears when you beat a level. Yay!</li><li>The butterfly on the level select map has cool new UI.</li><li>It is possible to outright skip levels now, if you need to. There's also a new option in the settings to turn off the possibility of skipping levels, too.</li><li>Borderless fullscreen doesn't reset back to regular borderfull fullscreen for a frame every time you reload the settings menu/title screen anymore.</li></ul>In other news.. Hopping Out will be part of Steam Next Fest: June 2026! Have you told everyone you know yet?<hr>The last while has been about adding new things and improving old things. (like all the other whiles)<br><b>The game has reached 200 levels! That's a bunch!</b><br><img src='assets/hoppingout/updates/jun2026_fire.png'><br>I would like to add just a few more levels before release. Very exciting i think!!<br>Since the last devlog, i made two very unique levels which i really like. I will keep these as a surprise.<br><img src='assets/hoppingout/updates/jun2026_cow.png'><br>I also worked on the soundtrack so it's closer to being ready for release. At the current moment, it has 57 tracks including all the level select theme variations, but that count will likely increase just a bit more before release.<hr><div id='croakfrogspot'></div>That's everything for now! By the next devlog, i hope to be able to reveal the game's release date. (it's getting very close!)"
             }
+        case 7:
+            return {
+                title : 'Releasing AUGUST 3!',
+                banner : "",
+                date : "July 25, 2026",
+                text : "Hopping Out is releasing on August 3, 2026! That's around 9 days from now.<br><br>Check out the new trailer:<br><a href='https://www.youtube.com/watch?v=vazbU4dLfeo'>Hopping Out Release Date Trailer</a><br><br>Very excited!!<br><div id='croakfrogspot'></div>"
+            };
         default:
             return "error";
     }
