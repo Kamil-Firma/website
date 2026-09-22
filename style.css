@@ -135,9 +135,11 @@ p, .projectText {
 }
 .projectLinks {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
-    height: 45px;
+	max-width: 400px;
+    min-height: 45px;
 }
 .projectLink {
     border: 2px white solid;
